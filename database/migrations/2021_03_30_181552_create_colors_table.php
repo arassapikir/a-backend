@@ -20,7 +20,7 @@ class CreateColorsTable extends Migration
             $table->string('color_2');
             $table->string('color_3')->nullable();
             $table->string('color_4')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

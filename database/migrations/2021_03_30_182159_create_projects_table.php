@@ -21,8 +21,6 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('font_id');
             $table->unsignedBigInteger('color_id');
             $table->unsignedBigInteger('icon_id');
-            $table->string('logo_light');
-            $table->string('logo_dark');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();

@@ -4,23 +4,23 @@
 <!--begin::Head-->
 <head>
     <meta charset="utf-8" />
-    <title>Giriş | Reflex</title>
+    <title>Giriş | {{config()->get('project')->name}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-    <link href="assets/css/pages/login/login-4.css" rel="stylesheet" type="text/css" />
+    {!! \App\Helpers\Assets::version('css/login.min.css', 'css') !!}
 
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    {!! \App\Helpers\Assets::version('css/plugins.bundle.css', 'css') !!}
+    {!! \App\Helpers\Assets::version('css/prismjs.bundle.css', 'css') !!}
+    {!! \App\Helpers\Assets::version('css/style.bundle.min.css', 'css') !!}
 
-    <link href="assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+    {!! \App\Helpers\Assets::version('css/base.min.css', 'css') !!}
+    {!! \App\Helpers\Assets::version('css/menu.min.css', 'css') !!}
+    {!! \App\Helpers\Assets::version('css/brand.min.css', 'css') !!}
+    {!! \App\Helpers\Assets::version('css/aside.min.css', 'css') !!}
 
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="{{asset("images/projects/" . config()->get('project')->subdomain . "/favicon.png")}}" />
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -35,7 +35,7 @@
             <div class="login-content d-flex flex-column pt-lg-0 pt-12">
                 <!--begin::Logo-->
                 <a href="#" class="login-logo pb-xl-20 pb-15">
-                    <img src="assets/media/logos/logo-4.png" class="max-h-70px" alt="" />
+                    <img src="{{asset("images/projects/" . config()->get('project')->subdomain . "/logo_dark.png")}}" class="max-h-70px" alt="" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Signin-->
@@ -44,40 +44,27 @@
                     <form class="form" id="kt_login_singin_form" action="">
                         <!--begin::Title-->
                         <div class="pb-5 pb-lg-15">
-                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
-                            <div class="text-muted font-weight-bold font-size-h4">New Here?
-                                <a href="custom/pages/login/login-4/signup.html" class="text-primary font-weight-bolder">Create Account</a></div>
+                            <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Giriş</h3>
                         </div>
                         <!--begin::Title-->
                         <!--begin::Form group-->
                         <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="text" name="username" autocomplete="off" />
+                            <label class="font-size-h6 font-weight-bolder text-dark">Telefon belgiňiz</label>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="number" name="phone" min="61000000" max="65000000" autocomplete="off" />
                         </div>
                         <!--end::Form group-->
                         <!--begin::Form group-->
                         <div class="form-group">
                             <div class="d-flex justify-content-between mt-n5">
-                                <label class="font-size-h6 font-weight-bolder text-dark pt-5">Your Name</label>
-                                <a href="custom/pages/login/login-4/forgot.html" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Forgot Password ?</a>
+                                <label class="font-size-h6 font-weight-bolder text-dark pt-5">Parol</label>
+                                <a href="custom/pages/login/login-4/forgot.html" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Ýene ýatdan çykdy?</a>
                             </div>
                             <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" autocomplete="off" />
                         </div>
                         <!--end::Form group-->
                         <!--begin::Action-->
                         <div class="pb-lg-0 pb-5">
-                            <button type="submit" id="kt_login_singin_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
-                            <button type="button" class="btn btn-light-primary font-weight-bolder px-8 py-4 my-3 font-size-lg">
-									<span class="svg-icon svg-icon-md">
-										<!--begin::Svg Icon | path:assets/media/svg/social-icons/google.svg-->
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-											<path d="M19.9895 10.1871C19.9895 9.36767 19.9214 8.76973 19.7742 8.14966H10.1992V11.848H15.8195C15.7062 12.7671 15.0943 14.1512 13.7346 15.0813L13.7155 15.2051L16.7429 17.4969L16.9527 17.5174C18.879 15.7789 19.9895 13.221 19.9895 10.1871Z" fill="#4285F4" />
-											<path d="M10.1993 19.9313C12.9527 19.9313 15.2643 19.0454 16.9527 17.5174L13.7346 15.0813C12.8734 15.6682 11.7176 16.0779 10.1993 16.0779C7.50243 16.0779 5.21352 14.3395 4.39759 11.9366L4.27799 11.9466L1.13003 14.3273L1.08887 14.4391C2.76588 17.6945 6.21061 19.9313 10.1993 19.9313Z" fill="#34A853" />
-											<path d="M4.39748 11.9366C4.18219 11.3166 4.05759 10.6521 4.05759 9.96565C4.05759 9.27909 4.18219 8.61473 4.38615 7.99466L4.38045 7.8626L1.19304 5.44366L1.08875 5.49214C0.397576 6.84305 0.000976562 8.36008 0.000976562 9.96565C0.000976562 11.5712 0.397576 13.0882 1.08875 14.4391L4.39748 11.9366Z" fill="#FBBC05" />
-											<path d="M10.1993 3.85336C12.1142 3.85336 13.406 4.66168 14.1425 5.33717L17.0207 2.59107C15.253 0.985496 12.9527 0 10.1993 0C6.2106 0 2.76588 2.23672 1.08887 5.49214L4.38626 7.99466C5.21352 5.59183 7.50242 3.85336 10.1993 3.85336Z" fill="#EB4335" />
-										</svg>
-                                        <!--end::Svg Icon-->
-									</span>Sign in with Google</button>
+                            <button type="submit" id="kt_login_singin_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Dawaý</button>
                         </div>
                         <!--end::Action-->
                     </form>
@@ -90,12 +77,12 @@
         <!--begin::Content-->
         <!--begin::Aside-->
         <div class="login-aside order-1 order-lg-2 bgi-no-repeat bgi-position-x-right">
-            <div class="login-conteiner bgi-no-repeat bgi-position-x-right bgi-position-y-bottom" style="background-image: url(assets/media/svg/illustrations/login-visual-4.svg);">
-                <!--begin::Aside title-->
-                <h3 class="pt-lg-40 pl-lg-20 pb-lg-0 pl-10 py-20 m-0 d-flex justify-content-lg-start font-weight-boldest display5 display1-lg text-white">We Got
-                    <br />A Surprise
-                    <br />For You</h3>
-                <!--end::Aside title-->
+            <div class="login-conteiner bgi-no-repeat bgi-position-x-right bgi-position-y-bottom" style="background-image: url({{asset('images/login/1.svg')}});">
+                <h3 class="pt-lg-40 pl-lg-20 pb-lg-0 pl-10 py-20 m-0 d-flex justify-content-lg-start font-weight-boldest display5 display1-lg text-dark-75">
+                    {{ strtoupper(config()->get('project')->name) }},
+                    <br />
+                    Hoş geldiňiz!
+                </h3>
             </div>
         </div>
         <!--end::Aside-->
@@ -103,18 +90,12 @@
     <!--end::Login-->
 </div>
 <!--end::Main-->
-<script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
-<!--begin::Global Config(global config for global JS scripts)-->
-<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
-<!--end::Global Config-->
-<!--begin::Global Theme Bundle(used by all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
-<!--end::Global Theme Bundle-->
-<!--begin::Page Scripts(used by this page)-->
-<script src="assets/js/pages/custom/login/login-4.js"></script>
-<!--end::Page Scripts-->
+
+{!! \App\Helpers\Assets::version('js/global.js', 'js') !!}
+{!! \App\Helpers\Assets::version('js/plugins.bundle.js', 'js') !!}
+{!! \App\Helpers\Assets::version('js/prismjs.bundle.js', 'js') !!}
+{!! \App\Helpers\Assets::version('js/scripts.bundle.min.js', 'js') !!}
+{!! \App\Helpers\Assets::version('js/login.min.js', 'js') !!}
 </body>
 <!--end::Body-->
 </html>
@@ -123,41 +104,41 @@
 
 
 
-@if (session('status'))
-    <div class="mb-4 font-medium text-sm text-green-600">
-        {{ session('status') }}
-    </div>
-@endif
+{{--@if (session('status'))--}}
+{{--    <div class="mb-4 font-medium text-sm text-green-600">--}}
+{{--        {{ session('status') }}--}}
+{{--    </div>--}}
+{{--@endif--}}
 
-<form method="POST" action="{{ route('login') }}">
-    @csrf
+{{--<form method="POST" action="{{ route('login') }}">--}}
+{{--    @csrf--}}
 
-    <div>
-        <x-jet-label for="email" value="{{ __('Email') }}" />
-        <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-    </div>
+{{--    <div>--}}
+{{--        <x-jet-label for="email" value="{{ __('Email') }}" />--}}
+{{--        <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />--}}
+{{--    </div>--}}
 
-    <div class="mt-4">
-        <x-jet-label for="password" value="{{ __('Password') }}" />
-        <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-    </div>
+{{--    <div class="mt-4">--}}
+{{--        <x-jet-label for="password" value="{{ __('Password') }}" />--}}
+{{--        <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />--}}
+{{--    </div>--}}
 
-    <div class="block mt-4">
-        <label for="remember_me" class="flex items-center">
-            <x-jet-checkbox id="remember_me" name="remember" />
-            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-        </label>
-    </div>
+{{--    <div class="block mt-4">--}}
+{{--        <label for="remember_me" class="flex items-center">--}}
+{{--            <x-jet-checkbox id="remember_me" name="remember" />--}}
+{{--            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>--}}
+{{--        </label>--}}
+{{--    </div>--}}
 
-    <div class="flex items-center justify-end mt-4">
-        @if (Route::has('password.request'))
-            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
-            </a>
-        @endif
+{{--    <div class="flex items-center justify-end mt-4">--}}
+{{--        @if (Route::has('password.request'))--}}
+{{--            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">--}}
+{{--                {{ __('Forgot your password?') }}--}}
+{{--            </a>--}}
+{{--        @endif--}}
 
-        <x-jet-button class="ml-4">
-            {{ __('Log in') }}
-        </x-jet-button>
-    </div>
-</form>
+{{--        <x-jet-button class="ml-4">--}}
+{{--            {{ __('Log in') }}--}}
+{{--        </x-jet-button>--}}
+{{--    </div>--}}
+{{--</form>--}}

@@ -59,9 +59,8 @@ class Project extends Model
         'subdomain',
         'project_type_id',
         'font_id',
+        'icon_id',
         'color_id',
-        'logo_light',
-        'logo_dark',
         'is_active',
     ];
 
