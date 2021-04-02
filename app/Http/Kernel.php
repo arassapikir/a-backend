@@ -38,12 +38,14 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\CheckWeb::class
+            \App\Http\Middleware\CheckWeb::class,
+            \App\Http\Middleware\TrackHits::class,
         ],
 
         'api' => [
             'throttle:api',
             \App\Http\Middleware\CheckApi::class,
+            \App\Http\Middleware\TrackHits::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];

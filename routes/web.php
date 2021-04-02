@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::domain('{subdomain}.' . config('app.domain'))->middleware(['auth:sanctum'])->group(function () {
+Route::get('/', 'Web\HomeController@index')->name('a');
+
+Route::domain('{subdomain}.' . config('app.domain'))->namespace('Web')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/', 'HomeController@index')->name('index');
 
 

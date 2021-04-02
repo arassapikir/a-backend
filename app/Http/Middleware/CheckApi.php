@@ -6,7 +6,6 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\Visitor;
 use App\Traits\ApiResponse;
-use App\Traits\GlobalVariables;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +14,7 @@ use Log;
 
 class CheckApi
 {
-    use ApiResponse, GlobalVariables;
+    use ApiResponse;
 
     /**
      * Handle an incoming request.
@@ -35,7 +34,7 @@ class CheckApi
         if (!$project){
             return $this->errorResponse('Invalid headers', 409);
         }
-        $this->project = $project;
+        config()->set('project', $project);
 
         /**
          * checking language
@@ -120,7 +119,7 @@ class CheckApi
                     $visitor->delete();
                 }
 
-                if (in_array($user->status, $this->blocked_user_statuses)){
+                if (in_array($user->status, config('app.blocked_statuses'))){
                     return $this->errorResponse(__('config.user_is_blocked'), 451);
                 }
             }
