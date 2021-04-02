@@ -23,8 +23,13 @@ class CheckProject
             abort(404);
         }
 
+        $project = Project::whereSubdomain($host[0])->first();
+        if (!$project){
+            abort(404);
+        }
+
         $request->merge([
-            '_project' => Project::whereSubdomain($host[0])->firstOrFail()
+            '_project' => $project
         ]);
 
         return $next($request);
