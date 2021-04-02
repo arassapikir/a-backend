@@ -3,11 +3,13 @@
 namespace App\Http\Middleware;
 
 use App\Models\Project;
+use App\Traits\GlobalVariables;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckProject
+class CheckWeb
 {
+    use GlobalVariables;
     /**
      * Handle an incoming request.
      *
@@ -15,7 +17,7 @@ class CheckProject
      * @param  Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         $host = explode(".", $request->getHttpHost());
 
@@ -23,14 +25,8 @@ class CheckProject
             abort(404);
         }
 
-        $project = Project::whereSubdomain($host[0])->first();
-        if (!$project){
-            abort(404);
-        }
-
-        $request->merge([
-            '_project' => $project
-        ]);
+        $project = Project::whereSubdomain($host[0])->firstOrFail();
+        $this->project = $project;
 
         return $next($request);
     }

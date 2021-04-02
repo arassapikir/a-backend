@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Closure;
 use Log;
 
-class CheckHeaders
+class CheckApi
 {
     use ApiResponse, GlobalVariables;
 
@@ -25,7 +25,7 @@ class CheckHeaders
      * @return mixed
      * @throws Exception
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         /**
          * checking subdomain
@@ -35,9 +35,7 @@ class CheckHeaders
         if (!$project){
             return $this->errorResponse('Invalid headers', 409);
         }
-        $request->merge([
-            '_project' => $project
-        ]);
+        $this->project = $project;
 
         /**
          * checking language

@@ -4,16 +4,15 @@
 namespace App\Traits;
 
 
-use App\Models\Project;
-
 trait GlobalVariables
 {
-    public Project $project;
-    public array $blocked_user_statuses;
+    /**
+     * @var \App\Models\Project
+     */
+    public \App\Models\Project $project;
 
-    public function __construct()
-    {
-        $this->project = request()->get('_project');
-        $this->blocked_user_statuses = ["blocked", "suspended"];
-    }
+    /**
+     * @var array|string[]
+     */
+    public array $blocked_user_statuses = ["blocked", "suspended"];
 }
