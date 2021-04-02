@@ -4,44 +4,42 @@
 namespace App\Traits;
 
 
+use Illuminate\Http\JsonResponse;
+
 trait ApiResponse
 {
 
-    /*
-     * Only validation response will have messages item.
-     * Messages will contain input validation errors.
-     * Also, it will be already translated to user's current language
+    /**
+     *   Success codes
+     *   200 => 'Data',
+     *   201 => 'Created',
+     *   202 => 'Updated',
+     *   204 => 'Deleted',
      *
-     * Datatype of message is an array.
+     *   Client errors codes
+     *   400 => 'Invalid parameter or content',
+     *   403 => 'No access',
+     *   403 => 'No access',
+     *   404 => 'Not found',
+     *   406 => 'Version failed',
+     *   409 => 'Invalid header',
+     *   422 => 'Validation error',
+     *   451 => 'User is blocked',
      *
-     * Example:
-     * messages = [
-     *      "inputName1": "Validation error message 1",
-     *      "inputName2": "Validation error message 2",
-     *      "inputName3": "Validation error message 3",
-     * ]
+     *   Server errors codes
+     *   500 => 'Server error'
      */
 
+    public array $responseCodes = [
 
-    public $responseCodes = [
-        200 => 'Data',
-        201 => 'Created',
-        202 => 'Updated',
-        204 => 'Deleted',
-
-        400 => 'Invalid parameter or content',
-        403 => 'Not authorized',
-        404 => 'Not found',
-        422 => 'Validation error',
-        500 => 'Server error'
     ];
 
-    public function successResponse(array $data, $code = 200): \Illuminate\Http\JsonResponse
+    public function successResponse(array $data, $code = 200): JsonResponse
     {
         return response()->json(['success' => true] + $data, $code);
     }
 
-    public function errorResponse($message, $code = 500, $errors = null): \Illuminate\Http\JsonResponse
+    public function errorResponse($message, $code = 500, $errors = null): JsonResponse
     {
         if ($code == 422){
             return response()->json(['success' => false, 'code' => $code, 'message' => $message, 'errors' => $errors], $code);

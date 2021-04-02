@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
             if ($request->headers->has('X-Custom-Token')){
 
                 if ($exception instanceof AuthenticationException) {
-                    return $this->errorResponse("Unauthenticated", 403);
+                    return $this->errorResponse("Unauthenticated", 401);
                 }
 
                 if ($exception instanceof MethodNotAllowedHttpException) {

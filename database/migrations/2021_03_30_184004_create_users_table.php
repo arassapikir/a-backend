@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->integer('otp')->nullable();
-            $table->string('status')->default(0);
+            $table->string('status')->default("unverified");
             $table->char('gender')->nullable();
             $table->date('birthday')->nullable();
             $table->string('platform')->default("unverified");

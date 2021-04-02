@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\Visitor;
 use App\Traits\ApiResponse;
+use App\Traits\GlobalVariables;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ use Log;
 
 class CheckHeaders
 {
-    use ApiResponse;
+    use ApiResponse, GlobalVariables;
 
     /**
      * Handle an incoming request.
@@ -77,7 +78,7 @@ class CheckHeaders
         /**
          * checking platform
          */
-        $token = strtolower($request->header('X-Custom-Token'));
+        $token = strtolower($request->header('X-Token'));
         if (!$token){
             return $this->errorResponse('Invalid headers', 409);
         }
@@ -108,7 +109,9 @@ class CheckHeaders
          */
         if (Auth::guard('api')->check()) {
             try {
-                User::findOrFail(Auth::guard('api')->id())->update([
+                $user = User::findOrFail(Auth::guard('api')->id());
+                $user->update([
+                    'ip' => $request->ip(),
                     'language' => $locale,
                     'platform' => $platform,
                     'version' => $version,
@@ -117,6 +120,10 @@ class CheckHeaders
                 $visitor = Visitor::whereToken($token)->first();
                 if ($visitor){
                     $visitor->delete();
+                }
+
+                if (in_array($user->status, $this->blocked_user_statuses)){
+                    return $this->errorResponse(__('config.user_is_blocked'), 451);
                 }
             }
             catch (Exception $e){
