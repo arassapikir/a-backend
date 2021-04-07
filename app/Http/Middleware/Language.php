@@ -16,8 +16,7 @@ class Language
      */
     public function handle(Request $request, Closure $next)
     {
-        if (session()->has('appLocale'))
-        if (session()->has('appLocale') AND in_array(session()->get('appLocale'), config('app.locales'))) {
+        if (session()->has('appLocale') AND array_key_exists(session()->get('appLocale'), config('app.locales'))) {
             app()->setLocale(session()->get('appLocale'));
         }
         else {
