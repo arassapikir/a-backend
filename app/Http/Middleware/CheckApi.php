@@ -31,7 +31,7 @@ class CheckApi
          */
         $subdomain = strtolower($request->header('X-Domain'));
         $project = Project::whereSubdomain($subdomain)->first();
-        if (!$project){
+        if (!$project || $subdomain == "admin"){
             return $this->errorResponse('Invalid headers', 409);
         }
         config()->set('project', $project);

@@ -2,9 +2,6 @@
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "../demo1/src/js/components/app.js":
-/*!*****************************************!*\
-  !*** ../demo1/src/js/components/app.js ***!
-  \*****************************************/
 /***/ ((module) => {
 
 "use strict";
@@ -4727,7 +4724,7 @@ $.extend(true, $.fn.KTDatatable.defaults, defaults);
 "use strict";
 
 
-// Component Definition 
+// Component Definition
 var KTDialog = function(options) {
     // Main object
     var the = this;
@@ -5142,7 +5139,7 @@ if ( true && typeof module.exports !== 'undefined') {
 "use strict";
 
 
-// Component Definition 
+// Component Definition
 var KTImageInput = function(elementId, options) {
     // Main object
     var the = this;
@@ -9788,7 +9785,7 @@ var KTLayoutHeaderMenu = function() {
 				state: 'mobile-toggle-active'
 			}
 		});
-		
+
 		_menuObject = new KTMenu(_menuElement, {
 			submenu: {
 				desktop: 'dropdown',
@@ -11581,7 +11578,7 @@ KTUtil.ready(function() {
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -11595,14 +11592,14 @@ KTUtil.ready(function() {
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
@@ -11660,4 +11657,3 @@ __webpack_require__(/*! @/src/js/layout/initialize.js */ "../demo1/src/js/layout
 
 /******/ })()
 ;
-//# sourceMappingURL=scripts.bundle.js.map

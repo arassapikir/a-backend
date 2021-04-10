@@ -2,9 +2,6 @@
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "../demo1/src/js/vendors/plugins/prism.init.js":
-/*!*****************************************************!*\
-  !*** ../demo1/src/js/vendors/plugins/prism.init.js ***!
-  \*****************************************************/
 /***/ (() => {
 
 Prism.plugins.NormalizeWhitespace.setDefaults({
@@ -1968,7 +1965,7 @@ Prism.languages.js = Prism.languages.javascript;
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -1982,14 +1979,14 @@ Prism.languages.js = Prism.languages.javascript;
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
@@ -2002,7 +1999,7 @@ Prism.languages.js = Prism.languages.javascript;
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -2013,7 +2010,7 @@ Prism.languages.js = Prism.languages.javascript;
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
@@ -2033,4 +2030,3 @@ __webpack_require__(/*! ./prismjs.scss */ "./webpack/plugins/custom/prismjs/pris
 
 /******/ })()
 ;
-//# sourceMappingURL=prismjs.bundle.js.map

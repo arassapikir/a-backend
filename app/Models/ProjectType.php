@@ -25,12 +25,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectType whereUpdatedAt($value)
+ * @property int $type
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectType whereType($value)
  */
 class ProjectType extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        "name"
+        "name",
+        "is_admin"
     ];
 }

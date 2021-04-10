@@ -3,24 +3,11 @@
 <html lang="en">
 <!--begin::Head-->
 <head>
-    <meta charset="utf-8" />
-    <title>Giriş | {{config()->get('project')->name}}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    @include("components.layout.header")
 
     {!! \App\Helpers\Assets::version('css/login.min.css', 'css') !!}
 
-    {!! \App\Helpers\Assets::version('css/plugins.bundle.css', 'css') !!}
-    {!! \App\Helpers\Assets::version('css/prismjs.bundle.css', 'css') !!}
-    {!! \App\Helpers\Assets::version('css/style.bundle.min.css', 'css') !!}
-
-    {!! \App\Helpers\Assets::version('css/base.min.css', 'css') !!}
-    {!! \App\Helpers\Assets::version('css/menu.min.css', 'css') !!}
-    {!! \App\Helpers\Assets::version('css/brand.min.css', 'css') !!}
-    {!! \App\Helpers\Assets::version('css/aside.min.css', 'css') !!}
-
-    <link rel="shortcut icon" href="{{asset("images/projects/" . config()->get('project')->subdomain . "/favicon.png")}}" />
+    <title>Giriş | {{config()->get('project')->name}}</title>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -34,32 +21,56 @@
             <!--begin::Wrapper-->
             <div class="login-content d-flex flex-column pt-lg-0 pt-12">
                 <!--begin::Logo-->
-                <a href="#" class="login-logo pb-xl-20 pb-15">
+                <a href="javascript:void(0)" class="login-logo pb-xl-20 pb-15">
                     <img src="{{asset("images/projects/" . config()->get('project')->subdomain . "/logo_dark.png")}}" class="max-h-70px" alt="" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Signin-->
                 <div class="login-form">
                     <!--begin::Form-->
-                    <form class="form" id="kt_login_singin_form" action="">
+                    <form class="form" method="POST" action="{{route("login")}}">
+                        @csrf
                         <!--begin::Title-->
                         <div class="pb-5 pb-lg-15">
                             <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Giriş</h3>
+                            @if (session('status'))
+                                <div class="mb-4 font-medium text-sm text-green-600">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                         </div>
                         <!--begin::Title-->
                         <!--begin::Form group-->
                         <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">Telefon belgiňiz</label>
-                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="number" name="phone" min="61000000" max="65000000" autocomplete="off" />
+                            <label for="phone" class="font-size-h6 font-weight-bolder text-dark">Telefon belgiňiz</label>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('phone') is-invalid @enderror" type="number" name="phone" id="phone" min="61000000" max="65000000" placeholder="65123456" required autofocus value="{{old("phone")}}" />
+                            @error('phone')
+                                <span class="form-text text-danger">
+                                    {{$message}}
+                                </span>
+                            @enderror
                         </div>
                         <!--end::Form group-->
                         <!--begin::Form group-->
                         <div class="form-group">
                             <div class="d-flex justify-content-between mt-n5">
-                                <label class="font-size-h6 font-weight-bolder text-dark pt-5">Parol</label>
-                                <a href="custom/pages/login/login-4/forgot.html" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Ýene ýatdan çykdy?</a>
+                                <label for="password" class="font-size-h6 font-weight-bolder text-dark pt-5">Parol</label>
+                                <a href="{{route('forgot.index')}}" class="text-primary font-size-h7 font-weight-bolder text-hover-primary pt-5">Ýene ýatdan çykdy?</a>
                             </div>
-                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" autocomplete="off" />
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('password') is-invalid @enderror" type="password" placeholder="Parol" name="password" id="password" required />
+                            @error('password')
+                                <span class="form-text text-danger">
+                                    {{$message}}
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-inline">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="remember" id="remember_me">
+                                    <span></span>Meni ýatda saklaý
+                                </label>
+                            </div>
                         </div>
                         <!--end::Form group-->
                         <!--begin::Action-->
@@ -91,54 +102,9 @@
 </div>
 <!--end::Main-->
 
-{!! \App\Helpers\Assets::version('js/global.js', 'js') !!}
-{!! \App\Helpers\Assets::version('js/plugins.bundle.js', 'js') !!}
-{!! \App\Helpers\Assets::version('js/prismjs.bundle.js', 'js') !!}
-{!! \App\Helpers\Assets::version('js/scripts.bundle.min.js', 'js') !!}
-{!! \App\Helpers\Assets::version('js/login.min.js', 'js') !!}
+@include("components.layout.scripts")
+
+{!! \App\Helpers\Assets::version('js/login.js', 'js') !!}
 </body>
 <!--end::Body-->
 </html>
-
-
-
-
-
-{{--@if (session('status'))--}}
-{{--    <div class="mb-4 font-medium text-sm text-green-600">--}}
-{{--        {{ session('status') }}--}}
-{{--    </div>--}}
-{{--@endif--}}
-
-{{--<form method="POST" action="{{ route('login') }}">--}}
-{{--    @csrf--}}
-
-{{--    <div>--}}
-{{--        <x-jet-label for="email" value="{{ __('Email') }}" />--}}
-{{--        <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />--}}
-{{--    </div>--}}
-
-{{--    <div class="mt-4">--}}
-{{--        <x-jet-label for="password" value="{{ __('Password') }}" />--}}
-{{--        <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />--}}
-{{--    </div>--}}
-
-{{--    <div class="block mt-4">--}}
-{{--        <label for="remember_me" class="flex items-center">--}}
-{{--            <x-jet-checkbox id="remember_me" name="remember" />--}}
-{{--            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>--}}
-{{--        </label>--}}
-{{--    </div>--}}
-
-{{--    <div class="flex items-center justify-end mt-4">--}}
-{{--        @if (Route::has('password.request'))--}}
-{{--            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">--}}
-{{--                {{ __('Forgot your password?') }}--}}
-{{--            </a>--}}
-{{--        @endif--}}
-
-{{--        <x-jet-button class="ml-4">--}}
-{{--            {{ __('Log in') }}--}}
-{{--        </x-jet-button>--}}
-{{--    </div>--}}
-{{--</form>--}}

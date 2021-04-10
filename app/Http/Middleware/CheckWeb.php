@@ -24,6 +24,7 @@ class CheckWeb
          */
         $host = explode(".", $request->getHttpHost());
 
+        //checking subdomain exists or not.
         if (strtolower($host[0]) == "a"){
             config()->set('project', new Project([
                 'name' => 'A',
@@ -31,6 +32,7 @@ class CheckWeb
                 'is_active' => true,
             ]));
         }
+        //if exists, add project to config
         else{
             config()->set('project', Project::whereSubdomain(strtolower($host[0]))->firstOrFail());
         }
@@ -55,7 +57,6 @@ class CheckWeb
                 'last_visited_at' => now()
             ]);
         }
-
 
         return $next($request);
     }

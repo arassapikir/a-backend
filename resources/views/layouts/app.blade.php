@@ -1,25 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        @include("components.layout.header")
         <title>@yield("title") | ProjectName</title>
-
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-
-        <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-
-        {!!  \App\Helpers\Assets::version('css/plugins.bundle.min.css', 'css') !!}
-        {!!  \App\Helpers\Assets::version('css/prismjs.bundle.min.css', 'css') !!}
-        {!!  \App\Helpers\Assets::version('css/style.bundle.min.css', 'css') !!}
-        {!!  \App\Helpers\Assets::version('css/base.min.css', 'css') !!}
-        {!!  \App\Helpers\Assets::version('css/menu.min.css', 'css') !!}
-        {!!  \App\Helpers\Assets::version('css/brand.min.css', 'css') !!}
-        {!!  \App\Helpers\Assets::version('css/aside.min.css', 'css') !!}
-        {!!  \App\Helpers\Assets::version('css/custom.css', 'css') !!}
-
         @yield('styles')
 
     </head>
@@ -1778,10 +1761,17 @@
 			</span>
         </div>
 
-        {!!  \App\Helpers\Assets::version('js/plugins.bundle.js', 'js') !!}
-        {!!  \App\Helpers\Assets::version('js/prismjs.bundle.js', 'js') !!}
-        {!!  \App\Helpers\Assets::version('js/scripts.bundle.js', 'js') !!}
-        {!!  \App\Helpers\Assets::version('js/scripts.js', 'js') !!}
+        @include("components.layout.scripts")
         @yield("scripts")
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+        @if($errors->has())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}", "Näsazlyk ýüze çykdy");
+                @endforeach
+            </ul>
+        @endif
     </body>
 </html>
