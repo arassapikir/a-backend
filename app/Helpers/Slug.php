@@ -11,19 +11,31 @@ class Slug
 {
     /**
      * @param Model $model
-     * @param string $slug
+     * @param string $value
+     * @param string $column
      * @return string
      */
-    public static function createSlug(Model $model, string $slug) : string
+    public static function get(Model $model, string $column = "name", string $value = "title") : string
     {
-        $name = Str::slug($slug);
-        if ($model::where('slug', $name)->first()){
+        $name = Str::slug($model->{$value});
+        if ($model::where($column, $name)->first()){
             $count = 1;
-            while ($model::where('slug', $name.'-'.$count)->first()){
+            while ($model::where($column, $name.'-'.$count)->first()){
                 $count ++;
             }
             return Str::slug($name.'-'.$count);
         }
         return $name;
+    }
+
+    /**
+     * @param Model $model
+     * @param string $column
+     * @param string $value
+     */
+    public static function update(Model $model, string $column = "name", string $value = "title"){
+        $model->update([
+            $column => self::get($model)
+        ]);
     }
 }

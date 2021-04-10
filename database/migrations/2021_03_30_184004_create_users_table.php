@@ -26,11 +26,14 @@ class CreateUsersTable extends Migration
             $table->string('status')->default("unverified");
             $table->char('gender')->nullable();
             $table->date('birthday')->nullable();
+            $table->string('language')->default('tk');
             $table->string('platform')->default("unverified");
             $table->string('version')->nullable();
-            $table->string('language')->default('tk');
-            $table->timestamp('last_visited_at')->useCurrent();
+            $table->string('ip')->nullable();
             $table->text('fcm_token')->nullable();
+            $table->text('token')->nullable();
+            $table->bigInteger('hits')->default(1);
+            $table->timestamp('last_visited_at')->useCurrent();
             $table->timestamps();
         });
     }

@@ -33,6 +33,7 @@ class Font extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        "title",
         "name",
         "image"
     ];

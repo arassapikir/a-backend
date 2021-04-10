@@ -16,7 +16,8 @@ class CreateLayoutsTable extends Migration
         Schema::create('layouts', function (Blueprint $table) {
             $table->id();
             $table->string('group');
-            $table->string('name')->unique();
+            $table->string('title');
+            $table->string('name')->nullable()->unique();
             $table->string('image');
             $table->timestamps();
             $table->softDeletes();

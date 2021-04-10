@@ -33,6 +33,7 @@ class ProjectType extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        "title",
         "name",
         "is_admin"
     ];

@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\User;
-use App\Models\Visitor;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -29,7 +27,12 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Visitor::observe(\App\Observers\VisitorObserver::class);
-        User::observe(\App\Observers\UserObserver::class);
+        \App\Models\Visitor::observe(\App\Observers\VisitorObserver::class);
+        \App\Models\User::observe(\App\Observers\UserObserver::class);
+        \App\Models\Color::observe(\App\Observers\ColorObserver::class);
+        \App\Models\Font::observe(\App\Observers\FontObserver::class);
+        \App\Models\Icon::observe(\App\Observers\IconObserver::class);
+        \App\Models\Layout::observe(\App\Observers\LayoutObserver::class);
+        \App\Models\ProjectType::observe(\App\Observers\ProjectTypeObserver::class);
     }
 }

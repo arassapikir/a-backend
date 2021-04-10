@@ -15,7 +15,8 @@ class CreateProjectTypesTable extends Migration
     {
         Schema::create('project_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
+            $table->string('name')->nullable()->unique();
             $table->boolean('type')->default(false);
             $table->timestamps();
             $table->softDeletes();

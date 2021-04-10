@@ -42,6 +42,7 @@ class Layout extends Model
 
     protected $fillable = [
         'group',
+        'title',
         'name',
         'image'
     ];

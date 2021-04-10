@@ -41,6 +41,7 @@ class Color extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'title',
         'name',
         'color_1',
         'color_2',

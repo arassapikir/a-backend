@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 class HomeController extends ApiBaseController
 {
     public function index(){
-
+        return $this->successResponse([
+             
+        ]);
     }
 }

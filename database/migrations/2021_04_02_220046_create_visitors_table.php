@@ -15,6 +15,7 @@ class CreateVisitorsTable extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
+            $table->string('subdomain')->nullable();
             $table->string('token')->nullable();
             $table->string('ip')->nullable();
             $table->bigInteger('hits')->default(1);
