@@ -18,7 +18,7 @@ class CreateLayoutsTable extends Migration
             $table->string('group');
             $table->string('title');
             $table->string('name')->nullable()->unique();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

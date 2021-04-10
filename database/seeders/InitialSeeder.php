@@ -35,34 +35,33 @@ class InitialSeeder extends Seeder
         ]);
 
 
-
         \App\Models\Font::create([
             "title" => "Font style 1"
         ]);
-        \App\Models\Font::create([
-            "title" => "Font style 2"
-        ]);
-
-
 
         \App\Models\Color::create([
             'title' => 'Color set 1',
-            'color_1' => "#FFFFFF",
-            'color_2' => "#000000",
+            'color_1' => "#CD3021",
+            'color_2' => "#C4C4C4",
+            'color_3' => "#000000",
+            'color_4' => "#FFFFFF",
         ]);
-        \App\Models\Color::create([
-            'title' => 'Color set 2',
-            'color_1' => "#FF5733",
-            'color_2' => "#756765",
-        ]);
-
-
-
 
         \App\Models\Icon::create([
             'title' => 'Icon set 1'
-        ]);\App\Models\Icon::create([
-            'title' => 'Icon set 2'
+        ]);
+
+        \App\Models\Layout::create([
+            'group' => "home",
+            'title' => 'Home layout 1',
+        ]);
+        \App\Models\Layout::create([
+            'group' => "subcategory",
+            'title' => 'Subcategory layout 1',
+        ]);
+        \App\Models\Layout::create([
+            'group' => "product-detail",
+            'title' => 'Product detail layout 1',
         ]);
     }
 }

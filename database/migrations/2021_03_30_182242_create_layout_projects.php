@@ -13,7 +13,7 @@ class CreateLayoutProjects extends Migration
      */
     public function up()
     {
-        Schema::create('layout_projects', function (Blueprint $table) {
+        Schema::create('layout_project', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('layout_id');
             $table->unsignedBigInteger('project_id');
