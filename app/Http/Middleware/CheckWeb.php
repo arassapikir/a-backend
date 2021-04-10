@@ -41,21 +41,12 @@ class CheckWeb
             /**
              * checking user blocked or not
              */
-            if (!in_array(Auth::user()->status, config('app.blocked_statuses')) || !config()->get('project')->is_active){
+            if (Auth::user()->is_user_blocked() || !config()->get('project')->is_active){
                 abort(451);
             }
 
-            /**
-             * update user data
-             */
-            $user = User::findOrFail(Auth::id());
-            $user->update([
-                'ip' => $request->ip(),
-                'language' => app()->getLocale(),
-                'platform' => "web",
-                'version' => "1.0.0",
-                'last_visited_at' => now()
-            ]);
+            //trigger update user
+            event('eloquent.updated: App\Models\User', Auth::user());
         }
 
         return $next($request);

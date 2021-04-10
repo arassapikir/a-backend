@@ -107,19 +107,14 @@ class CheckApi
         if (Auth::guard('api')->check()) {
             try {
                 $user = User::findOrFail(Auth::guard('api')->id());
-                $user->update([
-                    'ip' => $request->ip(),
-                    'language' => $locale,
-                    'platform' => $platform,
-                    'version' => $version,
-                    'last_visited_at' => now()
-                ]);
-                $visitor = Visitor::whereToken($token)->first();
-                if ($visitor){
-                    $visitor->delete();
-                }
 
-                if (in_array($user->status, config('app.blocked_statuses'))){
+                //trigger update user
+                event('eloquent.updated: App\Models\User', $user);
+
+                //deleting current token from visitors
+                Visitor::whereToken($token)->delete();
+
+                if ($user->is_user_blocked()){
                     return $this->errorResponse(__('config.user_is_blocked'), 451);
                 }
             }

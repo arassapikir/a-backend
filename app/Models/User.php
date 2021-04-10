@@ -63,11 +63,12 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $hits
  * @method static \Illuminate\Database\Eloquent\Builder|User whereHits($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIp($value)
+ * @property string|null $token
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereToken($value)
  */
 class User extends Authenticatable
 {
-    use HasApiTokens;
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     public static array $statuses = [
         "unverified" => [
@@ -130,6 +131,7 @@ class User extends Authenticatable
         'language',
         'last_visited_at',
         'fcm_token',
+        'token'
     ];
 
     /**
@@ -153,6 +155,14 @@ class User extends Authenticatable
         'last_visited_at' => 'datetime',
         'birthday' => 'date',
     ];
+
+    /**
+     * @return bool
+     */
+    public function is_user_blocked() : bool
+    {
+        return in_array($this->status, config('app.blocked_statuses'));
+    }
 
     public function project() : BelongsTo
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class VerifyRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class VerifyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,15 @@ class VerifyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'phone' => [
+                'required',
+                'numeric',
+                'between:61000000,65999999',
+                Rule::exists('users', 'phone')
+                    ->where('type', 'user')
+                    ->where('project_id', request()->get('_project')->id)
+            ],
+            'otp' => 'required|numeric|between:100000,999999'
         ];
     }
 }
