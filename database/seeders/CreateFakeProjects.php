@@ -97,5 +97,53 @@ class CreateFakeProjects extends Seeder
             'color_id' => Color::all()->random()->id,
             'is_active' => true,
         ])->layouts()->sync($layouts);
+
+        foreach (Project::where('project_type_id', '<>', 1)->get() as $project) {
+            for ($i = 1; $i < 4; $i++){
+                $rand = (bool)rand(0, 1);
+                $typeRandom = (bool)rand(0, 1);
+                $project->sliders()->create([
+                    'image' => "images/sliders/$i.jpg" ,
+                    'action_type' => $rand ? ($typeRandom ? "product" : "category") : null,
+                    'action_id' => $rand ? rand(1, 300) : null,
+                ]);
+            }
+
+            for ($i = 1; $i < 4; $i++){
+                $category = $project->categories()->create([
+                    'image' => "images/categories/$i.jpg" ,
+                    'title' => [
+                        'tk' => "Category $i (tk)",
+                        'ru' => "Category $i (ru)",
+                    ]
+                ]);
+                for ($j = 1; $j < 4; $j++){
+                    $numb = $j + 3;
+                    $sub = $project->categories()->create([
+                        'parent_id' => $category->id,
+                        'image' => "images/categories/$numb.jpg" ,
+                        'title' => [
+                            'tk' => "Category $i $j (tk)",
+                            'ru' => "Category $i $j (ru)",
+                        ]
+                    ]);
+                    if ((bool)rand(0, 1)){
+                        for ($m = 1; $m < 4; $m++) {
+                            $numb = $m + 3;
+                            $project->categories()->create([
+                                'parent_id' => $sub->id,
+                                'image' => "images/categories/$numb.jpg",
+                                'title' => [
+                                    'tk' => "Category $i $j $m (tk)",
+                                    'ru' => "Category $i $j $m (ru)",
+                                ]
+                            ]);
+                        }
+                    }
+                }
+            }
+
+        }
+
     }
 }

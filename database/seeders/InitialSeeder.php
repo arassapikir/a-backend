@@ -60,8 +60,12 @@ class InitialSeeder extends Seeder
             'title' => 'Subcategory layout 1',
         ]);
         \App\Models\Layout::create([
-            'group' => "product-detail",
-            'title' => 'Product detail layout 1',
+            'group' => "products",
+            'title' => 'Products layout 1',
+        ]);
+        \App\Models\Layout::create([
+            'group' => "product",
+            'title' => 'Product layout 1',
         ]);
     }
 }

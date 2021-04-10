@@ -27,7 +27,7 @@ class VisitorObserver
      */
     public function updated(Visitor $visitor)
     {
-        $visitor->increment('hits');
+        //$visitor->increment('hits');
     }
 
     /**

@@ -39,7 +39,8 @@ class Layout extends Model
     public static array $layouts = [
         "home" => "Baş sahypa",
         "subcategory" => "Kategoriýa",
-        "product-detail" => "Haryt sahypasy",
+        "products" => "Harytlar sahypasy",
+        "product" => "Haryt sahypasy",
     ];
 
     protected $fillable = [

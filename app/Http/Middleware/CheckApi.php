@@ -81,45 +81,35 @@ class CheckApi
         }
 
         if (!Auth::guard('api')->check()){
-            try {
-                Visitor::updateOrCreate(
-                    [
-                        'token' => $token,
-                    ],
-                    [
-                        'subdomain' => $project->subdomain,
-                        'ip' => $request->ip(),
-                        'language' => $locale,
-                        'platform' => $platform,
-                        'version' => $version,
-                        'last_visited_at' => now(),
-                    ]
-                );
-            }
-            catch (Exception $e){
-                Log::error($e->getMessage());
-            }
+            Visitor::updateOrCreate(
+                [
+                    'token' => $token,
+                ],
+                [
+                    'subdomain' => $project->subdomain,
+                    'ip' => $request->ip(),
+                    'language' => $locale,
+                    'platform' => $platform,
+                    'version' => $version,
+                    'last_visited_at' => now(),
+                ]
+            );
         }
 
         /**
          * checking user logged in, if yes updating data
          */
         if (Auth::guard('api')->check()) {
-            try {
-                $user = User::findOrFail(Auth::guard('api')->id());
+            $user = User::findOrFail(Auth::guard('api')->id());
 
-                //trigger update user
-                event('eloquent.updated: App\Models\User', $user);
+            //trigger update user
+            event('eloquent.updated: App\Models\User', $user);
 
-                //deleting current token from visitors
-                Visitor::whereToken($token)->delete();
+            //deleting current token from visitors
+            Visitor::whereToken($token)->delete();
 
-                if ($user->is_user_blocked()){
-                    return $this->errorResponse(__('config.user_is_blocked'), 451);
-                }
-            }
-            catch (Exception $e){
-                Log::error($e->getMessage());
+            if ($user->is_user_blocked()){
+                return $this->errorResponse(__('config.user_is_blocked'), 451);
             }
         }
 

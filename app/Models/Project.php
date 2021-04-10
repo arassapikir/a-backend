@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -49,6 +50,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @property string $subdomain
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereSubdomain($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Slider[] $sliders
+ * @property-read int|null $sliders_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $category_parents
+ * @property-read int|null $category_parents_count
  */
 class Project extends Model
 {
@@ -91,5 +98,20 @@ class Project extends Model
     public function layouts() : BelongsToMany
     {
         return $this->belongsToMany(Layout::class);
+    }
+
+    public function sliders() : HasMany
+    {
+        return $this->hasMany(Slider::class);
+    }
+
+    public function categories() : HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function category_parents() : HasMany
+    {
+        return $this->hasMany(Category::class)->whereNull('parent_id');
     }
 }
