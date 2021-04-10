@@ -62,8 +62,8 @@ class Handler extends ExceptionHandler
                     return $this->errorResponse("$modelName not found.", 404);
                 }
 
-                if ($exception instanceof ValidationException) {
-                    return $this->errorResponse(__('auth.failed'), 422, $exception->errors());
+                if (method_exists($exception, 'errors')){
+                    return $this->errorResponse($exception->getMessage(), 422, method_exists($exception, 'errors') ? $exception->errors() : null);
                 }
 
                 if ($exception instanceof QueryException) {
@@ -72,6 +72,8 @@ class Handler extends ExceptionHandler
                         return $this->errorResponse('Cannot remove this resource permanently. It is related with any other resource', 400);
                     }
                 }
+
+                return $this->errorResponse($exception->getMessage(), method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500);
             }
         });
 
