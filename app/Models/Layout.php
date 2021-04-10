@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Layout whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Layout whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Layout whereUpdatedAt($value)
+ * @property string $title
+ * @method static \Illuminate\Database\Eloquent\Builder|Layout whereTitle($value)
  */
 class Layout extends Model
 {

@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Icon whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Icon whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Icon whereUpdatedAt($value)
+ * @property string $title
+ * @method static \Illuminate\Database\Eloquent\Builder|Icon whereTitle($value)
  */
 class Icon extends Model
 {

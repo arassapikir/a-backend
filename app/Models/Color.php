@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Color whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Color whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Color whereUpdatedAt($value)
+ * @property string $title
+ * @method static \Illuminate\Database\Eloquent\Builder|Color whereTitle($value)
  */
 class Color extends Model
 {

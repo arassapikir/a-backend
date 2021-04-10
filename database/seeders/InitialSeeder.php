@@ -13,59 +13,56 @@ class InitialSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\ProjectType::insert(
-            [
-                "name" => "Electronics",
-                "type" => false
-            ],
-            [
-                "name" => "Fashion",
-                "type" => false
-            ],
-            [
-                "name" => "Food",
-                "type" => false
-            ],
-            [
-                "name" => "Market",
-                "type" => false
-            ],
-            [
-                "name" => "Pharmacy",
-                "type" => false
-            ]
-        );
-
-        \App\Models\Font::insert(
-            [
-                "name" => "Font style 1"
-            ],
-            [
-                "name" => "Font style 2"
-            ]
-        );
-
-        \App\Models\Color::insert(
-            [
-                'name' => 'Color set 1',
-                'color_1' => "#FFFFFF",
-                'color_2' => "#000000",
-            ],
-            [
-                'name' => 'Color set 2',
-                'color_1' => "#FF5733",
-                'color_2' => "#756765",
-            ]
-        );
+        \App\Models\ProjectType::create([
+            "title" => "Electronics",
+            "type" => false
+        ]);
+        \App\Models\ProjectType::create([
+            "title" => "Fashion",
+            "type" => false
+        ]);
+        \App\Models\ProjectType::create([
+            "title" => "Food",
+            "type" => false
+        ]);
+        \App\Models\ProjectType::create([
+            "title" => "Market",
+            "type" => false
+        ]);
+        \App\Models\ProjectType::create([
+            "title" => "Pharmacy",
+            "type" => false
+        ]);
 
 
-        \App\Models\Icon::insert(
-            [
-                'name' => 'Icon set 1'
-            ],
-            [
-                'name' => 'Icon set 2'
-            ]
-        );
+
+        \App\Models\Font::create([
+            "title" => "Font style 1"
+        ]);
+        \App\Models\Font::create([
+            "title" => "Font style 2"
+        ]);
+
+
+
+        \App\Models\Color::create([
+            'title' => 'Color set 1',
+            'color_1' => "#FFFFFF",
+            'color_2' => "#000000",
+        ]);
+        \App\Models\Color::create([
+            'title' => 'Color set 2',
+            'color_1' => "#FF5733",
+            'color_2' => "#756765",
+        ]);
+
+
+
+
+        \App\Models\Icon::create([
+            'title' => 'Icon set 1'
+        ]);\App\Models\Icon::create([
+            'title' => 'Icon set 2'
+        ]);
     }
 }

@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Font whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Font whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Font whereUpdatedAt($value)
+ * @property string $title
+ * @method static \Illuminate\Database\Eloquent\Builder|Font whereTitle($value)
  */
 class Font extends Model
 {
