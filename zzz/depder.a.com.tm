@@ -1,6 +1,4 @@
 server {
-    listen 80;
-    listen [::]:80;
     server_name depder.a.com.tm;
     root /var/www/a.com.tm/public;
 
@@ -45,4 +43,25 @@ server {
     location ~ /\.(?!well-known).* {
         deny all;
     }
+
+    listen [::]:443 ssl; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/depder.a.com.tm/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/depder.a.com.tm/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = depder.a.com.tm) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    listen [::]:80;
+    server_name depder.a.com.tm;
+    return 404; # managed by Certbot
+
+
 }
