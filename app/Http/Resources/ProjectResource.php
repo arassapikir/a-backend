@@ -17,10 +17,10 @@ class ProjectResource extends JsonResource
     {
         $data = [
             "name" => $this->name,
-            "project_type_id" => $this->project_type->name ?? "default",
-            "font_id" => $this->font->name ?? "default",
-            "icon_id" => $this->color->name ?? "default",
-            "color_id" => $this->icon->name ?? "default",
+            "project_type" => $this->project_type->name ?? "default",
+            "font" => $this->font->name ?? "default",
+            "icon" => $this->icon->name ?? "default",
+            "color" => $this->color_id ? new ColorResource($this->color) : "default",
         ];
         foreach (Layout::$layouts as $layout => $title){
             $data["layout_$layout"] = $this->layouts->where("group", $layout)->first()->name ?? "defualt";

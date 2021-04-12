@@ -14,17 +14,17 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if( request()->is('api/*')){
-            $user->update([
-                'ip' => request()->ip(),
-                'platform' => strtolower(request()->header('Platform')),
-                'version' => request()->header('Version'),
-                'language' => strtolower(request()->header('Language')),
-                'last_visited_at' => now(),
-                'fcm_token' => request()->get('X-Fcm-Token'),
-                'token' => request()->get('X-Token')
-            ]);
-        }
+//        if( request()->is('api/*')){
+//            $user->update([
+//                'ip' => request()->ip(),
+//                'platform' => strtolower(request()->header('Platform')),
+//                'version' => request()->header('Version'),
+//                'language' => strtolower(request()->header('Language')),
+//                'last_visited_at' => now(),
+//                'fcm_token' => request()->get('X-Fcm-Token'),
+//                'token' => request()->get('X-Token')
+//            ]);
+//        }
     }
 
     /**
@@ -35,17 +35,17 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        if( request()->is('api/*')){
-           $user->update([
-               'ip' => request()->ip(),
-               'platform' => strtolower(request()->header('Platform')),
-               'version' => request()->header('Version'),
-               'language' => strtolower(request()->header('Language')),
-               'last_visited_at' => now(),
-               'fcm_token' => request()->get('X-Fcm-Token'),
-               'token' => request()->get('X-Token')
-           ]);
-        }
+//        if( request()->is('api/*')){
+//           $user->update([
+//               'ip' => request()->ip(),
+//               'platform' => strtolower(request()->header('Platform')),
+//               'version' => request()->header('Version'),
+//               'language' => strtolower(request()->header('Language')),
+//               'last_visited_at' => now(),
+//               'fcm_token' => request()->get('X-Fcm-Token'),
+//               'token' => request()->get('X-Token')
+//           ]);
+//        }
     }
 
     /**

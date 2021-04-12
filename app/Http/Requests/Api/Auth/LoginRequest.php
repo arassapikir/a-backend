@@ -31,7 +31,7 @@ class LoginRequest extends FormRequest
                 'between:61000000,65999999',
                 Rule::unique('users', 'phone')
                     ->where('type', 'user')
-                    ->where('project_id', request()->get('_project')->id)
+                    ->where('project_id', config()->get('project')->id)
             ],
             'name' => 'nullable|string|min:3'
         ];

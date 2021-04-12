@@ -43,6 +43,8 @@ class Category extends Model
 {
     use SoftDeletes;
 
+    protected $with = ['children'];
+
     protected $fillable = [
         'project_id',
         'parent_id',

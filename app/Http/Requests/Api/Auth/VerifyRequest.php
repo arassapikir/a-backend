@@ -31,7 +31,7 @@ class VerifyRequest extends FormRequest
                 'between:61000000,65999999',
                 Rule::exists('users', 'phone')
                     ->where('type', 'user')
-                    ->where('project_id', request()->get('_project')->id)
+                    ->where('project_id', config()->get('project')->id)
             ],
             'otp' => 'required|numeric|between:100000,999999'
         ];
