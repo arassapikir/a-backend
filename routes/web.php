@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-if (count(explode(".", request()->getHttpHost())) == 2){
+$host = explode(".", request()->getHttpHost());
+$count = end($host) == "tm" ? 3 : 2;
+
+if (count(explode(".", request()->getHttpHost())) == $count){
     Route::get('/', 'HomeController@index')->name('index');
 
     Route::get('/login', function (){
