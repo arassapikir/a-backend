@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::view('/count', 'count')->name('count');
+
 $host = explode(".", request()->getHttpHost());
 $count = end($host) == "tm" ? 3 : 2;
 
