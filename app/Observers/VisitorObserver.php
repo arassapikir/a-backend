@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VisitorObserver
 {
@@ -27,6 +28,9 @@ class VisitorObserver
      */
     public function updated(Visitor $visitor)
     {
+        DB::table('visitors')->update([
+            'hits' => $visitor->hits + 1
+        ]);
         //$visitor->increment('hits');
     }
 

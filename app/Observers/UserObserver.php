@@ -3,9 +3,26 @@
 namespace App\Observers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserObserver
 {
+    public function update(User $user){
+        if( request()->is('api/*')){
+            DB::table('users')->update([
+                'ip' => request()->ip(),
+                'platform' => strtolower(request()->header('Platform')),
+                'version' => request()->header('Version'),
+                'language' => strtolower(request()->header('Language')),
+                'last_visited_at' => now(),
+                'updated_at' => now(),
+                'fcm_token' => request()->get('X-Fcm-Token'),
+                'token' => request()->get('X-Token'),
+                'hits' => $user->hits + 1
+            ]);
+        }
+    }
+
     /**
      * Handle the User "created" event.
      *
@@ -14,17 +31,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-//        if( request()->is('api/*')){
-//            $user->update([
-//                'ip' => request()->ip(),
-//                'platform' => strtolower(request()->header('Platform')),
-//                'version' => request()->header('Version'),
-//                'language' => strtolower(request()->header('Language')),
-//                'last_visited_at' => now(),
-//                'fcm_token' => request()->get('X-Fcm-Token'),
-//                'token' => request()->get('X-Token')
-//            ]);
-//        }
+        $this->update($user);
     }
 
     /**
@@ -35,17 +42,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-//        if( request()->is('api/*')){
-//           $user->update([
-//               'ip' => request()->ip(),
-//               'platform' => strtolower(request()->header('Platform')),
-//               'version' => request()->header('Version'),
-//               'language' => strtolower(request()->header('Language')),
-//               'last_visited_at' => now(),
-//               'fcm_token' => request()->get('X-Fcm-Token'),
-//               'token' => request()->get('X-Token')
-//           ]);
-//        }
+        $this->update($user);
     }
 
     /**

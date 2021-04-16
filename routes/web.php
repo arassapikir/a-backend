@@ -7,7 +7,7 @@ Route::view('/count', 'count')->name('count');
 $host = explode(".", request()->getHttpHost());
 $count = end($host) == "tm" ? 3 : 2;
 
-if (count(explode(".", request()->getHttpHost())) == $count){
+if (count($host) == $count){
     Route::get('/', 'HomeController@index')->name('index');
 
     Route::get('/login', function (){
@@ -21,6 +21,11 @@ else{
             Route::middleware(['auth:sanctum'])->group(function (){
                 Route::get('/', 'HomeController@index')->name('home');
 
+                Route::resource('projects', 'ProjectController');
+                Route::resource('fonts', 'FontController')->only(['index', 'update', 'destroy']);
+                Route::resource('colors', 'ColorController')->except(['index', 'update', 'destroy']);
+                Route::resource('layouts', 'LayoutController')->except(['index', 'update', 'destroy']);
+                Route::resource('icons', 'IconController')->except(['index', 'update', 'destroy']);
 
                 //profile
                 Route::post('/profile/update', 'Api\ProfileController@update')->name('profile.update')->middleware('auth');
