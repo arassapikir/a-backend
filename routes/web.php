@@ -23,9 +23,9 @@ else{
 
                 Route::resource('projects', 'ProjectController');
                 Route::resource('fonts', 'FontController')->only(['index', 'update', 'destroy']);
-                Route::resource('colors', 'ColorController')->except(['index', 'update', 'destroy']);
-                Route::resource('layouts', 'LayoutController')->except(['index', 'update', 'destroy']);
-                Route::resource('icons', 'IconController')->except(['index', 'update', 'destroy']);
+                Route::resource('colors', 'ColorController')->only(['index', 'update', 'destroy']);
+                Route::resource('layouts', 'LayoutController')->only(['index', 'update', 'destroy']);
+                Route::resource('icons', 'IconController')->only(['index', 'update', 'destroy']);
 
                 //profile
                 Route::post('/profile/update', 'Api\ProfileController@update')->name('profile.update')->middleware('auth');

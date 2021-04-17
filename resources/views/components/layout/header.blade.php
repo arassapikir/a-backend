@@ -16,6 +16,7 @@
 {!!  \App\Helpers\Assets::version('css/brand.min.css', 'css') !!}
 {!!  \App\Helpers\Assets::version('css/aside.min.css', 'css') !!}
 {!!  \App\Helpers\Assets::version('css/toastr.min.css', 'css') !!}
-{!!  \App\Helpers\Assets::version('css/custom.css', 'css') !!}
+{!!  \App\Helpers\Assets::version('css/datatables.bundle.min.css', 'css') !!}
+{!!  \App\Helpers\Assets::version('css/style.min.css', 'css') !!}
 
 <link rel="shortcut icon" href="{{asset("images/projects/" . config()->get('project')->subdomain . "/favicon.ico ")}}" />

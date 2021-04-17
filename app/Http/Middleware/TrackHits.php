@@ -26,7 +26,7 @@ class TrackHits
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        if ($this->isNotBot()){
+//        if ($this->isNotBot()){
             $ip = $request->ip();
             $date = strtotime(date('Y-m-d ' . '00:00:00'));
             $hour = date('H');
@@ -49,7 +49,7 @@ class TrackHits
                     'subdomain' => config()->get('project')->subdomain
                 ]);
             }
-        }
+//        }
 
         return $next($request);
     }
