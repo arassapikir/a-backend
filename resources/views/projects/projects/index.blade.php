@@ -1,15 +1,15 @@
 @extends("layouts.app")
 
-@section("title", "Fontlar")
+@section("title", "Proýektler")
 
 @section("subheader")
     @include('components.layout.sub', [
-        'page' => 'Fontlar',
+        'page' => 'Proýektler',
         'breadcrumb' => [
             [false, "Projects"],
-            [false, "Fontlar"],
+            [false, "Proýektler"],
         ],
-        'total' => count($fonts)
+        'total' => count($projects)
     ])
 @endsection
 
@@ -21,7 +21,7 @@
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
                         <h3 class="card-label">
-                            Fontlar
+                            Proýektler
                         </h3>
                     </div>
                     <div class="card-toolbar">
@@ -40,29 +40,52 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Suraty</th>
-                                <th>Ady</th>
+                                <th>Proýekt</th>
+                                <th>Görnüşi</th>
+                                <th>Layoutlar</th>
+                                <th>Font</th>
+                                <th>Icon</th>
+                                <th>Reňkler</th>
+                                <th>Aktiwmi?</th>
                                 <th>Goşulan wagty</th>
                                 <th>Goşmaça</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($fonts as $item)
+                            @foreach($projects as $item)
                                 <tr>
                                     <td>
                                         {{$item->id}}
                                     </td>
                                     <td>
-                                        {{ $item->image ? asset($item->image) : "-" }}
+                                        {!! $item->group_label !!}
                                     </td>
                                     <td>
-                                        {{ $item->title }}
+                                        {{ $item->project_type->title }}
+                                    </td>
+                                    <td>
+                                        @foreach($item->layouts as $layout)
+                                            <span>
+                                                <div class="font-weight-bolder font-size-lg mb-0">{{$layout->title}}</div>
+                                            </span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        {{$item->font->title ?? "-"}}
+                                    </td>
+                                    <td>
+                                        {{$item->icon->title ?? "-"}}
+                                    </td>
+                                    <td>
+                                        {{$item->color->title ?? "-"}}
+                                    </td>
+                                    <td>
+                                        {!! $item->active_label !!}
                                     </td>
                                     <td>{{date('d-m-y H:i', strtotime($item->created_at))}}</td>
                                     <td>
                                         @include('components.datatable.update', ['url' => route('fonts.update', $item->id), "body" => implode(" ", [
-                                            \App\Helpers\Form::input("Suraty", "image", "accept='image/*'", "", "col-md-12", "file"),
-                                            \App\Helpers\Form::input("Ady", "title", "required", $item->title),
+
                                         ])])
                                         @include('components.datatable.delete', ['url' => route('fonts.destroy', $item->id)])
                                     </td>
@@ -84,8 +107,12 @@
             order: [],
             columns: [
                 {data: 'id', name: 'id', searchable: false, orderable: false},
-                {data: 'image', name: 'image', searchable: false, orderable: false},
-                {data: 'title', name: 'title', searchable: false, orderable: false},
+                {data: 'group', name: 'group', searchable: false, orderable: false},
+                {data: 'type', name: 'type', searchable: false, orderable: false},
+                {data: 'layout', name: 'layout', searchable: false, orderable: false},
+                {data: 'font', name: 'font', searchable: false, orderable: false},
+                {data: 'icon', name: 'icon', searchable: false, orderable: false},
+                {data: 'color', name: 'color', searchable: false, orderable: false},
                 {data: 'created_at', name: 'created_at', searchable: false, orderable: false},
                 {data: 'actions', name: 'actions', searchable: false, orderable: false},
             ]

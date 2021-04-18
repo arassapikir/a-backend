@@ -1,15 +1,15 @@
 @extends("layouts.app")
 
-@section("title", "Fontlar")
+@section("title", "Layouts")
 
 @section("subheader")
     @include('components.layout.sub', [
-        'page' => 'Fontlar',
+        'page' => 'Layouts',
         'breadcrumb' => [
             [false, "Projects"],
-            [false, "Fontlar"],
+            [false, "Layouts"],
         ],
-        'total' => count($fonts)
+        'total' => count($layouts)
     ])
 @endsection
 
@@ -21,7 +21,7 @@
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
                         <h3 class="card-label">
-                            Fontlar
+                            Layouts
                         </h3>
                     </div>
                     <div class="card-toolbar">
@@ -41,13 +41,14 @@
                             <tr>
                                 <th>#</th>
                                 <th>Suraty</th>
+                                <th>Görnüşi</th>
                                 <th>Ady</th>
                                 <th>Goşulan wagty</th>
                                 <th>Goşmaça</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($fonts as $item)
+                            @foreach($layouts as $item)
                                 <tr>
                                     <td>
                                         {{$item->id}}
@@ -56,9 +57,14 @@
                                         {{ $item->image ? asset($item->image) : "-" }}
                                     </td>
                                     <td>
+                                        {{ $item->group }}
+                                    </td>
+                                    <td>
                                         {{ $item->title }}
                                     </td>
-                                    <td>{{date('d-m-y H:i', strtotime($item->created_at))}}</td>
+                                    <td>
+                                        {{date('d-m-y H:i', strtotime($item->created_at))}}
+                                    </td>
                                     <td>
                                         @include('components.datatable.update', ['url' => route('fonts.update', $item->id), "body" => implode(" ", [
                                             \App\Helpers\Form::input("Suraty", "image", "accept='image/*'", "", "col-md-12", "file"),

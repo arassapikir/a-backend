@@ -75,6 +75,30 @@ class Project extends Model
         "is_active" => "boolean"
     ];
 
+    public function getGroupLabelAttribute() : string
+    {
+        return "
+            <div class='d-flex align-items-center'>
+                <div class='symbol symbol-40 symbol-sm flex-shrink-0'>
+                    <img class='' src='" . asset("images/projects/$this->subdomain/logo_dark.png") . "' alt='photo'>
+                </div>
+                <div class='ml-4'>
+                    <div class='text-dark-75 font-weight-bolder font-size-lg mb-0'>$this->name</div>
+                    <a href='$this->subdomain.a.com.tm' target='_blank' class='text-muted font-weight-bold text-hover-primary'>$this->subdomain.a.com.tm</a>
+                </div>
+            </div>
+        ";
+    }
+
+    public function getActiveLabelAttribute() : string
+    {
+        $color = $this->is_active ? "success" : "danger";
+        $title = $this->is_active ? "Hawa" : "Ýok";
+        return "
+            <span class='label label-lg font-weight-bold label-$color label-inline'>$title</span>
+        ";
+    }
+
     public function project_type(): BelongsTo
     {
         return $this->belongsTo(ProjectType::class);

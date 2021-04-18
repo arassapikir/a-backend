@@ -1,3 +1,5 @@
+var dataTable;
+
 toastr.options = {
     "closeButton": true,
     "debug": false,

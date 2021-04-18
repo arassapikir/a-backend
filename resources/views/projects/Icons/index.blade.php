@@ -1,15 +1,15 @@
 @extends("layouts.app")
 
-@section("title", "Fontlar")
+@section("title", "Icons")
 
 @section("subheader")
     @include('components.layout.sub', [
-        'page' => 'Fontlar',
+        'page' => 'Icons',
         'breadcrumb' => [
             [false, "Projects"],
-            [false, "Fontlar"],
+            [false, "Icons"],
         ],
-        'total' => count($fonts)
+        'total' => count($icons)
     ])
 @endsection
 
@@ -21,7 +21,7 @@
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
                         <h3 class="card-label">
-                            Fontlar
+                            Icons
                         </h3>
                     </div>
                     <div class="card-toolbar">
@@ -47,7 +47,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($fonts as $item)
+                            @foreach($icons as $item)
                                 <tr>
                                     <td>
                                         {{$item->id}}

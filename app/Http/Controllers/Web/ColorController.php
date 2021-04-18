@@ -18,6 +18,10 @@ class ColorController extends Controller
     public function update(ColorRequest $request, Color $color){
         $color->update([
             "title" => $request->get('title'),
+            'color_1' => $request->get('color_1'),
+            'color_2' => $request->get('color_2'),
+            'color_3' => $request->get('color_3'),
+            'color_4' => $request->get('color_4'),
             "image" => $request->file('image') ? File::storeImage($request->file('image'), $request->get('title'), 'fonts') : $color->image
         ]);
         return $this->updated();

@@ -1694,16 +1694,5 @@
         </div>
 
         @include("components.layout.scripts")
-        @yield("scripts")
-        @if (session('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
-        @if($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    toastr.error("{{ $error }}", "Näsazlyk ýüze çykdy");
-                @endforeach
-            </ul>
-        @endif
     </body>
 </html>

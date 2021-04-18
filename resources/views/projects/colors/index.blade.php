@@ -1,15 +1,15 @@
 @extends("layouts.app")
 
-@section("title", "Fontlar")
+@section("title", "Reňkler")
 
 @section("subheader")
     @include('components.layout.sub', [
-        'page' => 'Fontlar',
+        'page' => 'Reňkler',
         'breadcrumb' => [
             [false, "Projects"],
-            [false, "Fontlar"],
+            [false, "Reňkler"],
         ],
-        'total' => count($fonts)
+        'total' => count($colors)
     ])
 @endsection
 
@@ -21,7 +21,7 @@
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
                         <h3 class="card-label">
-                            Fontlar
+                            Reňkler
                         </h3>
                     </div>
                     <div class="card-toolbar">
@@ -42,12 +42,13 @@
                                 <th>#</th>
                                 <th>Suraty</th>
                                 <th>Ady</th>
+                                <th>Reňkler</th>
                                 <th>Goşulan wagty</th>
                                 <th>Goşmaça</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($fonts as $item)
+                            @foreach($colors as $item)
                                 <tr>
                                     <td>
                                         {{$item->id}}
@@ -58,11 +59,21 @@
                                     <td>
                                         {{ $item->title }}
                                     </td>
+                                    <td>
+                                        <span class="label label-xl mr-2" style="color:#fff; background-color: {{$item->color_1}}; border: 1px solid black;"></span>
+                                        <span class="label label-xl mr-2" style="color:#fff; background-color: {{$item->color_2}}; border: 1px solid black;"></span>
+                                        <span class="label label-xl mr-2" style="color:#fff; background-color: {{$item->color_3}}; border: 1px solid black;"></span>
+                                        <span class="label label-xl mr-2" style="color:#fff; background-color: {{$item->color_4}}; border: 1px solid black;"></span>
+                                    </td>
                                     <td>{{date('d-m-y H:i', strtotime($item->created_at))}}</td>
                                     <td>
                                         @include('components.datatable.update', ['url' => route('fonts.update', $item->id), "body" => implode(" ", [
                                             \App\Helpers\Form::input("Suraty", "image", "accept='image/*'", "", "col-md-12", "file"),
                                             \App\Helpers\Form::input("Ady", "title", "required", $item->title),
+                                            \App\Helpers\Form::input("1. Reňk", "color_1", "required", $item->color_1, "col-md-6", "color"),
+                                            \App\Helpers\Form::input("2. Reňk", "color_2", "required", $item->color_2, "col-md-6", "color"),
+                                            \App\Helpers\Form::input("3. Reňk", "color_3", "required", $item->color_3, "col-md-6", "color"),
+                                            \App\Helpers\Form::input("4. Reňk", "color_4", "required", $item->color_4, "col-md-6", "color"),
                                         ])])
                                         @include('components.datatable.delete', ['url' => route('fonts.destroy', $item->id)])
                                     </td>
@@ -86,6 +97,7 @@
                 {data: 'id', name: 'id', searchable: false, orderable: false},
                 {data: 'image', name: 'image', searchable: false, orderable: false},
                 {data: 'title', name: 'title', searchable: false, orderable: false},
+                {data: 'colors', name: 'colors', searchable: false, orderable: false},
                 {data: 'created_at', name: 'created_at', searchable: false, orderable: false},
                 {data: 'actions', name: 'actions', searchable: false, orderable: false},
             ]
