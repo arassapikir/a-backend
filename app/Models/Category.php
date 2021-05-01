@@ -38,7 +38,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
  * @property-read string $title_translation
- * @method static \Illuminate\Database\Eloquent\Builder|Category parent()
  */
 class Category extends Model
 {

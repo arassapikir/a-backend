@@ -14,7 +14,7 @@ class ProjectScope implements Scope
 
     public function apply(Builder $builder, Model $model)
     {
-        if (Auth::user()->is_customer()){
+        if (Auth::check() && Auth::user()->is_customer()){
             $builder->where('project_id', Auth::user()->project_id);
         }
     }

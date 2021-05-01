@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -49,12 +50,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
  * @mixin \Eloquent
+ * @property int $project_id
+ * @property-read \App\Models\Project $project
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereProjectId($value)
+ * @property-read mixed $discounted
+ * @property-read mixed $discounted_percentage
+ * @property-read mixed $new
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Picture[] $pictures
+ * @property-read int|null $pictures_count
  */
 class Product extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
+        'project_id',
         'category_id',
         'code',
         'slug',
@@ -64,6 +74,8 @@ class Product extends Model
         'discounted_price',
         'order',
         'active',
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [
@@ -74,6 +86,17 @@ class Product extends Model
         'description' => "object",
     ];
 
+    public function getNewAttribute(){
+        return Carbon::now()->diff(new Carbon($this->created_at))->days > 7;
+    }
+
+    public function getDiscountedAttribute(){
+        return ! ! $this->discounted_price;
+    }
+
+    public function getDiscountedPercentageAttribute(){
+        return $this->discounted_price ? round(100 - ($this->discounted_price * 100 / $this->price)) : null;
+    }
 
     /**
      * Scopes
@@ -92,12 +115,20 @@ class Product extends Model
     /**
      * Relations
      */
+    public function project(){
+        return $this->belongsTo(Project::class);
+    }
+
     public function category(){
         return $this->belongsTo(Category::class);
     }
 
     public function parameters(){
         return $this->hasMany(Parameter::class);
+    }
+
+    public function pictures(){
+        return $this->hasMany(Picture::class);
     }
 
     public function cover(){

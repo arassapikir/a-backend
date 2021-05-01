@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('category_id');
             $table->string('code')->nullable();
             $table->string('slug')->nullable();
@@ -23,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price');
             $table->decimal('discounted_price')->nullable();
             $table->integer('order')->nullable();
-            $table->boolean('active')->nullable();
+            $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

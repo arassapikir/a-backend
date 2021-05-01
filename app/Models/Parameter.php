@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Parameter withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Parameter withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Parameter parent()
  */
 class Parameter extends Model
 {
