@@ -21,11 +21,15 @@ else{
             Route::middleware(['auth:sanctum'])->group(function (){
                 Route::get('/', 'HomeController@index')->name('home');
 
+                //project and settings
                 Route::resource('projects', 'ProjectController');
                 Route::resource('fonts', 'FontController')->only(['index', 'update', 'destroy']);
                 Route::resource('colors', 'ColorController')->only(['index', 'update', 'destroy']);
                 Route::resource('layouts', 'LayoutController')->only(['index', 'update', 'destroy']);
                 Route::resource('icons', 'IconController')->only(['index', 'update', 'destroy']);
+
+                //project data
+                Route::resource('categories', 'CategoryController');
 
                 //profile
                 Route::post('/profile/update', 'Api\ProfileController@update')->name('profile.update')->middleware('auth');

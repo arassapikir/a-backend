@@ -168,4 +168,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function is_admin() : bool
+    {
+        return $this->project_id == 1 && $this->type == "admin";
+    }
+
+    public function is_customer() : bool
+    {
+        return $this->project_id != 1 && $this->type == "customer";
+    }
+
+    public function is_user() : bool
+    {
+        return $this->project_id != 1 && $this->type == "user";
+    }
 }

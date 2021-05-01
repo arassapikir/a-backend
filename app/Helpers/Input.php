@@ -12,11 +12,14 @@ class Input
      * @param $languages
      * @return array
      */
-    public static function getText($request, string $attribute, $languages) : array
+    public static function getText($request, string $attribute, $languages = null) : array
     {
+        if (!$languages){
+            $languages = config('app.locales');
+        }
         $data = [];
-        foreach ($languages as $lang){
-            $data[$lang->abbreviation] = $request[$attribute.'_'.$lang->abbreviation];
+        foreach (array_keys($languages) as $lang){
+            $data[$lang] = $request[$attribute.'_'.$lang];
         }
         return $data;
     }

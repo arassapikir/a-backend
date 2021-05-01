@@ -8,9 +8,11 @@
             <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                 @foreach($breadcrumb as $item)
-                    <li class="breadcrumb-item text-muted">
-                        <a href="{{$item[0] ?: "javascript:void(0)"}}" class="text-muted">{{$item[1]}}</a>
-                    </li>
+                    @if($item[1])
+                        <li class="breadcrumb-item text-muted">
+                            <a href="{{$item[0] ?: "javascript:void(0)"}}" class="text-muted">{{$item[1]}}</a>
+                        </li>
+                    @endif
                 @endforeach
             </ul>
             <!--end::Breadcrumb-->

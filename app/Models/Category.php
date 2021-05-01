@@ -75,4 +75,9 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, "parent_id");
     }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new \App\Scopes\ProjectScope);
+    }
 }
