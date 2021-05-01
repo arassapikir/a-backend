@@ -16,7 +16,7 @@ class ProductIndexResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'cover' => $this->cover ? $this->cover->url : null,
+            'cover' => $this->cover_url,
             'title' => $this->title->{app()->getLocale()},
             'description' => $this->description->{app()->getLocale()},
             'price' => number_format($this->price, 2),

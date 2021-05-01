@@ -58,6 +58,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read mixed $new
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Picture[] $pictures
  * @property-read int|null $pictures_count
+ * @property-read mixed $cover_url
  */
 class Product extends Model
 {
@@ -96,6 +97,10 @@ class Product extends Model
 
     public function getDiscountedPercentageAttribute(){
         return $this->discounted_price ? round(100 - ($this->discounted_price * 100 / $this->price)) : null;
+    }
+
+    public function getCoverUrlAttribute(){
+        return $this->cover ? asset($this->cover->url) : null;
     }
 
     /**

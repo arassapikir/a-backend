@@ -15,7 +15,7 @@ class ProductController extends Controller
         if ($request->has('category_id')){
             $products->where('category_id', $request->get('category_id'));
         }
-        $products->orderBy('order')->paginate($per_page);
+        $products = $products->orderBy('order')->paginate($per_page);
 
         return $this->successResponse([
             'per_page' => $products->perPage(),
