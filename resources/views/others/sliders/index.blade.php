@@ -1,16 +1,15 @@
 @extends("layouts.app")
 
-@section("title", "Kategoriýalar")
+@section("title", "Slaýderler")
 
 @section("subheader")
     @include('components.layout.sub', [
-        'page' => 'Kategoriýalar',
+        'page' => 'Slaýderler',
         'breadcrumb' => [
-            [false, "Harytlar"],
-            [route('categories.index'), "Kategoriýalar"],
-            [$parent ? route('categories.index', ['category', $parent->id]) : false, $parent->title->tk ?? null]
+            [false, "Sazlamalar"],
+            [route('sliders.index'), "Slaýderler"],
         ],
-        'total' => count($categories)
+        'total' => count($sliders)
     ])
 @endsection
 
@@ -22,7 +21,7 @@
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
                         <h3 class="card-label">
-                            Kategoriýalar
+                            Slaýderler
                         </h3>
                     </div>
                     <div class="card-toolbar">
@@ -42,15 +41,14 @@
                             <tr>
                                 <th>#</th>
                                 <th>Suraty</th>
-                                <th>Ady</th>
                                 {!! \App\Datatable\Project::header() !!}
-                                <th>Podkategoriýa</th>
+                                <th>Hereket</th>
                                 <th>Goşulan wagty</th>
                                 <th>Goşmaça</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $item)
+                            @foreach($sliders as $item)
                                 <tr>
                                     <td>
                                         {{$item->id}}
@@ -58,26 +56,14 @@
                                     <td>
                                         {!! \App\Datatable\Label::image($item->image) !!}
                                     </td>
-                                    <td>
-                                        {!! \App\Datatable\Label::multiLanguageLabel($item->title) !!}
-                                    </td>
                                     {!! \App\Datatable\Project::body($item->project) !!}
-                                    <td class="pl-0">
-                                        @if($item->children->count() > 0)
-                                            <a href="{{route('categories.index', ['category' => $item->id])}}">
-                                                <span class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">{{$item->children->count()}} sany</span>
-                                                <span class="text-muted font-weight-bold d-block">
-                                                    Seret <i class=" fa fa-arrow-right icon-nm"></i>
-                                                </span>
-                                            </a>
-                                        @else
-                                            <span class="text-muted font-weight-bold d-block">Ýok</span>
-                                        @endif
+                                    <td>
+                                        -
                                     </td>
                                     <td>{{date('d-m-y H:i', strtotime($item->created_at))}}</td>
                                     <td>
 
-                                        @include('components.datatable.delete', ['url' => route('categories.destroy', $item->id)])
+                                        @include('components.datatable.delete', ['url' => route('sliders.destroy', $item->id)])
                                     </td>
                                 </tr>
                             @endforeach
@@ -98,9 +84,8 @@
             columns: [
                 {data: 'id', name: 'id', searchable: false, orderable: false},
                 {data: 'image', name: 'image', searchable: false, orderable: false},
-                {data: 'title', name: 'title', searchable: false, orderable: false},
                 {!! \App\Datatable\Project::js() !!},
-                {data: 'subs', name: 'subs', searchable: false, orderable: false},
+                {data: 'action', name: 'action', searchable: false, orderable: false},
                 {data: 'created_at', name: 'created_at', searchable: false, orderable: false},
                 {data: 'actions', name: 'actions', searchable: false, orderable: false},
             ]

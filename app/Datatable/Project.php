@@ -29,6 +29,6 @@ class Project
         if (Auth::user()->is_customer()){
             return "";
         }
-        return "{data: 'project', name: 'project', searchable: false, orderable: false},";
+        return "{data: 'project', name: 'project', searchable: false, orderable: false}";
     }
 }

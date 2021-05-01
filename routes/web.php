@@ -31,6 +31,9 @@ else{
                 //project data
                 Route::resource('categories', 'CategoryController');
 
+                //others
+                Route::resource('sliders', 'SliderController');
+
                 //profile
                 Route::post('/profile/update', 'Api\ProfileController@update')->name('profile.update')->middleware('auth');
                 Route::post('/profile/update/password', 'Api\ProfileController@password')->name('profile.password')->middleware('auth');
