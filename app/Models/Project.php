@@ -56,6 +56,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $category_parents
  * @property-read int|null $category_parents_count
+ * @property-read string $active_label
+ * @property-read string $group_label
  */
 class Project extends Model
 {

@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Layout whereUpdatedAt($value)
  * @property string $title
  * @method static \Illuminate\Database\Eloquent\Builder|Layout whereTitle($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Size[] $sizes
+ * @property-read int|null $sizes_count
  */
 class Layout extends Model
 {
@@ -49,4 +51,8 @@ class Layout extends Model
         'name',
         'image'
     ];
+
+    public function sizes(){
+        return $this->hasMany(Size::class);
+    }
 }
