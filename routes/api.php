@@ -14,4 +14,8 @@ Route::namespace('Api')->name('api.')->group(function () {
     //home api
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('categories/{category}', 'CategoryController@show')->name('category.show');
+
+    //products
+    Route::get('products', 'ProductController@index')->name('products.index');
+    Route::get('products/{product}', 'ProductController@show')->name('products.show');
 });
