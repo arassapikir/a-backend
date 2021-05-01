@@ -28,8 +28,9 @@ else{
                 Route::resource('layouts', 'LayoutController')->only(['index', 'update', 'destroy']);
                 Route::resource('icons', 'IconController')->only(['index', 'update', 'destroy']);
 
-                //project data
+                //products
                 Route::resource('categories', 'CategoryController');
+                Route::resource('products', 'ProductController');
 
                 //others
                 Route::resource('sliders', 'SliderController');

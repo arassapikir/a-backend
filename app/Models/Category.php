@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
  * @property-read string $title_translation
+ * @method static \Illuminate\Database\Eloquent\Builder|Category parent()
  */
 class Category extends Model
 {
@@ -61,6 +62,23 @@ class Category extends Model
         return $this->title->{app()->getLocale()} ?? "-";
     }
 
+
+    /**
+     * Scopes
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new \App\Scopes\ProjectScope);
+    }
+
+    public function scopeParent($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+
+    /**
+     * Relations
+     */
     public function project() : BelongsTo
     {
         return $this->belongsTo(Project::class);
@@ -74,10 +92,5 @@ class Category extends Model
     public function children() : HasMany
     {
         return $this->hasMany(Category::class, "parent_id");
-    }
-
-    protected static function booted()
-    {
-        static::addGlobalScope(new \App\Scopes\ProjectScope);
     }
 }
