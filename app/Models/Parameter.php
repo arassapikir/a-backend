@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Parameter newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Parameter newQuery()
  * @method static \Illuminate\Database\Query\Builder|Parameter onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Parameter parent()
  * @method static \Illuminate\Database\Eloquent\Builder|Parameter query()
  * @method static \Illuminate\Database\Eloquent\Builder|Parameter whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Parameter whereDeletedAt($value)
