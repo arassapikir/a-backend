@@ -62,6 +62,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $brand_id
  * @property-read \App\Models\Brand|null $brand
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereBrandId($value)
+ * @property-read mixed $brand_label
  */
 class Product extends Model
 {
@@ -93,6 +94,10 @@ class Product extends Model
 
     public function getNewAttribute(){
         return Carbon::now()->diff(new Carbon($this->created_at))->days > 7;
+    }
+
+    public function getBrandLabelAttribute(){
+        return $this->brand ? $this->brand->name : null;
     }
 
     public function getDiscountedAttribute(){
