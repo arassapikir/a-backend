@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Project;
@@ -17,6 +18,24 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        \DB::table('brands')->truncate();
+        \DB::table('products')->truncate();
+        Brand::create([
+            "name" => "Samsung"
+        ]);
+        Brand::create([
+            "name" => "Apple"
+        ]);
+        Brand::create([
+            "name" => "H&M"
+        ]);
+        Brand::create([
+            "name" => "Zara"
+        ]);
+        Brand::create([
+            "name" => "Ülker"
+        ]);
+        $brands = Brand::all();
         $discounts = [50, 60, 70, 75, 80, 90, 95];
         foreach (Category::doesntHave("children")->get() as $category){
             for ($i = 0; $i < rand(15, 30); $i++){
@@ -24,6 +43,7 @@ class ProductSeeder extends Seeder
                 $product = Product::create([
                     'project_id' => $category->project_id,
                     'category_id' => $category->id,
+                    'brand_id' => rand(0, 1) ? $brands->random()->id : null,
                     'title' => [
                         'tk' => ucfirst(implode(' ', $faker->words(3))) . " (tk)",
                         'ru' => ucfirst(implode(' ', $faker->words(3))) . " (ru)",

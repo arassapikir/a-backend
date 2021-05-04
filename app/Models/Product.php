@@ -59,6 +59,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Picture[] $pictures
  * @property-read int|null $pictures_count
  * @property-read mixed $cover_url
+ * @property int|null $brand_id
+ * @property-read \App\Models\Brand|null $brand
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBrandId($value)
  */
 class Product extends Model
 {
@@ -67,6 +70,7 @@ class Product extends Model
     protected $fillable = [
         'project_id',
         'category_id',
+        'brand_id',
         'code',
         'slug',
         'title',
@@ -126,6 +130,10 @@ class Product extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
     }
 
     public function parameters(){
