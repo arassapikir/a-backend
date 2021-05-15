@@ -25,6 +25,7 @@ class ProductIndexResource extends JsonResource
             'discounted_price' => number_format($this->discounted_price, 2),
             'discounted_percentage' => $this->discounted_percentage,
             'is_new' => $this->new,
+            'stock' => $this->stock,
         ];
     }
 }

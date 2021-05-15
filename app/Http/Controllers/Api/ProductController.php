@@ -29,7 +29,7 @@ class ProductController extends Controller
 
     public function show(Product $product){
         return $this->successResponse([
-            'product' => ProductShowResource::collection($product)
+            'product' => new ProductShowResource($product)
         ]);
     }
 }

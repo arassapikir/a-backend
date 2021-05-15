@@ -69,6 +69,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $values_count
  * @property int $stock_type
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereStockType($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Parameter[] $sizes
+ * @property-read int|null $sizes_count
  */
 class Product extends Model
 {
@@ -127,9 +129,9 @@ class Product extends Model
 
     public function getStockAttribute(){
         if ($this->stock_type == 1){
-            return $this->stock;
+            return $this->attributes['stock'];
         }
-        return $this->parameters->where('type', Parameter::size())->first()->pivot->stock;
+        return $this->sizes->sum('pivot.stock');
     }
 
     /**

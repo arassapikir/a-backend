@@ -45,6 +45,10 @@ class Picture extends Model
         'url',
     ];
 
+    public function getUrlAttribute(){
+        return asset($this->attributes['url']);
+    }
+
     public function parent(){
         return $this->belongsTo(Picture::class);
     }

@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @method static \Illuminate\Database\Eloquent\Builder|Parameter whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Parameter parent()
  */
 class Parameter extends Model
 {

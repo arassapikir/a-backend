@@ -108,8 +108,10 @@ class ProductSeeder extends Seeder
                 }
 
                 if ($category->project->is_stock_parameter_required()){
-                    $size = $sizes->random();
-                    $product->values()->attach($size->id, ['parent_id' => $size->parent_id, 'stock' => rand(10, 100)]);
+                    $size_attrs = $sizes->random(rand(2, 5));
+                    foreach ($size_attrs as $size){
+                        $product->values()->attach($size->id, ['parent_id' => $size->parent_id, 'stock' => rand(10, 100)]);
+                    }
                 }
 
                 foreach ($parameters->random(rand(2, 4)) as $parameter){
