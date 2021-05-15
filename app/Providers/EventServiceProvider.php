@@ -34,5 +34,6 @@ class EventServiceProvider extends ServiceProvider
         \App\Models\Icon::observe(\App\Observers\IconObserver::class);
         \App\Models\Layout::observe(\App\Observers\LayoutObserver::class);
         \App\Models\ProjectType::observe(\App\Observers\ProjectTypeObserver::class);
+        \App\Models\Product::observe(\App\Observers\ProductObserever::class);
     }
 }

@@ -28,7 +28,7 @@ class VisitorObserver
      */
     public function updated(Visitor $visitor)
     {
-        DB::table('visitors')->update([
+        DB::table('visitors')->where('id', $visitor->id)->update([
             'hits' => $visitor->hits + 1
         ]);
         //$visitor->increment('hits');

@@ -9,7 +9,7 @@ class UserObserver
 {
     public function update(User $user){
         if( request()->is('api/*')){
-            DB::table('users')->update([
+            DB::table('users')->where('id', $user->id)->update([
                 'ip' => request()->ip(),
                 'platform' => strtolower(request()->header('Platform')),
                 'version' => request()->header('Version'),

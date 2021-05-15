@@ -18,4 +18,7 @@ Route::namespace('Api')->name('api.')->group(function () {
     //products
     Route::get('products', 'ProductController@index')->name('products.index');
     Route::get('products/{product}', 'ProductController@show')->name('products.show');
+
+    //products
+    Route::get('products', 'ProductController@index')->name('products.index');
 });
