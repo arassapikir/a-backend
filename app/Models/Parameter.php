@@ -30,15 +30,29 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Parameter withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Parameter withoutTrashed()
  * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder|Parameter parent()
+ * @property string $type
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Parameter whereType($value)
  */
 class Parameter extends Model
 {
     use SoftDeletes;
 
+    public static array $types = [
+        'others',
+        'size',
+        'color',
+    ];
+
+    public static function size() : int {
+        return array_search('size', self::$types);
+    }
+
     protected $fillable = [
         'parent_id',
-        'title'
+        'title',
+        'type'
     ];
 
     protected $casts = [
@@ -57,10 +71,14 @@ class Parameter extends Model
      * Relations
      */
     public function parent(){
-        return $this->belongsTo(Parameter::class);
+        return $this->belongsTo(Parameter::class, 'parent_id');
     }
 
     public function children(){
-        return $this->hasMany(Parameter::class);
+        return $this->hasMany(Parameter::class, 'parent_id');
+    }
+
+    public function products(){
+        return $this->belongsToMany(Product::class, "product_parameters", "value_id", "product_id")->withPivot('stock');
     }
 }

@@ -18,6 +18,7 @@ class CreateProjectTypesTable extends Migration
             $table->string('title');
             $table->string('name')->nullable()->unique();
             $table->boolean('type')->default(false);
+            $table->boolean('stock_parameter')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

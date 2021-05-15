@@ -15,23 +15,28 @@ class InitialSeeder extends Seeder
     {
         \App\Models\ProjectType::create([
             "title" => "Electronics",
-            "type" => false
+            "type" => false,
+            "stock_parameter" => false,
         ]);
         \App\Models\ProjectType::create([
             "title" => "Fashion",
-            "type" => false
+            "type" => false,
+            "stock_parameter" => true,
         ]);
         \App\Models\ProjectType::create([
             "title" => "Food",
-            "type" => false
+            "type" => false,
+            "stock_parameter" => false,
         ]);
         \App\Models\ProjectType::create([
             "title" => "Market",
-            "type" => false
+            "type" => false,
+            "stock_parameter" => false,
         ]);
         \App\Models\ProjectType::create([
             "title" => "Pharmacy",
-            "type" => false
+            "type" => false,
+            "stock_parameter" => false,
         ]);
 
 

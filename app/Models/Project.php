@@ -77,6 +77,14 @@ class Project extends Model
         "is_active" => "boolean"
     ];
 
+    public function is_stock_parameter_required(): bool
+    {
+        return (boolean) $this->project_type->stock_parameter;
+    }
+
+    /*
+     * Attributes
+     */
     public function getGroupLabelAttribute() : string
     {
         return "
@@ -101,6 +109,9 @@ class Project extends Model
         ";
     }
 
+    /*
+     * Relations
+     */
     public function project_type(): BelongsTo
     {
         return $this->belongsTo(ProjectType::class);

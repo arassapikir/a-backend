@@ -63,10 +63,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Brand|null $brand
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereBrandId($value)
  * @property-read mixed $brand_label
+ * @property int $stock
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereStock($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Parameter[] $values
+ * @property-read int|null $values_count
+ * @property int $stock_type
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereStockType($value)
  */
 class Product extends Model
 {
     use SoftDeletes;
+
+    /*
+     * Stock types: 1 => default, 2 => size
+     *
+     */
 
     protected $fillable = [
         'project_id',
@@ -79,6 +90,8 @@ class Product extends Model
         'price',
         'discounted_price',
         'order',
+        'stock_type',
+        'stock',
         'active',
         'created_at',
         'updated_at',
@@ -112,6 +125,13 @@ class Product extends Model
         return $this->cover ? asset($this->cover->url) : null;
     }
 
+    public function getStockAttribute(){
+        if ($this->stock_type == 1){
+            return $this->stock;
+        }
+        return $this->parameters->where('type', Parameter::size())->first()->pivot->stock;
+    }
+
     /**
      * Scopes
      */
@@ -141,8 +161,12 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function values(){
+        return $this->belongsToMany(Parameter::class, "product_parameters", "product_id", "value_id")->withPivot(['parent_id', 'stock']);
+    }
+
     public function parameters(){
-        return $this->hasMany(Parameter::class);
+        return $this->belongsToMany(Parameter::class, "product_parameters", "product_id", "parent_id")->withPivot(['value_id', 'stock']);
     }
 
     public function pictures(){

@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Parameter;
 use App\Models\Product;
-use App\Models\Project;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +20,45 @@ class ProductSeeder extends Seeder
     {
         \DB::table('brands')->truncate();
         \DB::table('products')->truncate();
+        \DB::table('parameters')->truncate();
+        \DB::table('product_parameters')->truncate();
+        $size_parent = Parameter::create([
+            'title' => [
+                'tk' => "Size (tk)",
+                'ru' => "Size (ru)",
+            ],
+            'type' => 1
+        ]);
+        $sizes = [
+            "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "XS", "X", "M", "L", "XL", "XXL",
+        ];
+        foreach ($sizes as $size){
+            $size_parent->children()->create([
+                'title' => [
+                    'tk' => $size,
+                    'ru' => $size,
+                ],
+                'type' => $size_parent->type
+            ]);
+        }
+        for ($j = 1; $j < 4; $j++){
+            $parameter = Parameter::create([
+                'title' => [
+                    'tk' => "Parameter $j (tk)",
+                    'ru' => "Parameter $j (ru)",
+                ],
+                'type' => 0
+            ]);
+            for ($i = 1; $i < 4; $i++){
+                $parameter->children()->create([
+                    'title' => [
+                        'tk' => "Value $j $i (tk)",
+                        'ru' => "Value $j $i (ru)",
+                    ],
+                    'type' => $parameter->type
+                ]);
+            }
+        }
         Brand::create([
             "name" => "Samsung"
         ]);
@@ -36,6 +75,8 @@ class ProductSeeder extends Seeder
             "name" => "Ülker"
         ]);
         $brands = Brand::all();
+        $sizes = Parameter::whereNotNull("parent_id")->where("type", Parameter::size())->get();
+        $parameters = Parameter::whereNotNull("parent_id")->where("type", "<>", Parameter::size())->get();
         $discounts = [50, 60, 70, 75, 80, 90, 95];
         foreach (Category::doesntHave("children")->get() as $category){
             for ($i = 0; $i < rand(15, 30); $i++){
@@ -54,6 +95,8 @@ class ProductSeeder extends Seeder
                     ],
                     'price' => rand(100, 10000) / 100,
                     'order' => $i + 1,
+                    'stock_type' => $category->project->is_stock_parameter_required() ? 2 : 1,
+                    'stock' => $category->project->is_stock_parameter_required() ? 0 : rand(10, 100),
                     'created_at' => Carbon::now()->subDays(rand(0, 20)),
                     'updated_at' => Carbon::now()->subDays(rand(0, 20)),
                 ]);
@@ -62,6 +105,15 @@ class ProductSeeder extends Seeder
                     $product->update([
                         'discounted_price' => $product->price * $discounts[rand(0, 6)] / 100,
                     ]);
+                }
+
+                if ($category->project->is_stock_parameter_required()){
+                    $size = $sizes->random();
+                    $product->values()->attach($size->id, ['parent_id' => $size->parent_id, 'stock' => rand(10, 100)]);
+                }
+
+                foreach ($parameters->random(rand(2, 4)) as $parameter){
+                    $product->values()->attach($parameter->id, ['parent_id' => $parameter->parent_id]);
                 }
 
                 $product->pictures()->create([

@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectType whereType($value)
  * @property string $title
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectType whereTitle($value)
+ * @property bool $stock_parameter
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectType whereStockParameter($value)
  */
 class ProjectType extends Model
 {
@@ -38,5 +40,10 @@ class ProjectType extends Model
         "title",
         "name",
         "type"
+    ];
+
+    protected $casts = [
+        "type" => "boolean",
+        "stock_parameter" => "boolean"
     ];
 }

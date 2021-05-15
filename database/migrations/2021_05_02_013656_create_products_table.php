@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('brand_id')->nullable();
             $table->string('code')->nullable();
             $table->string('slug')->nullable();
             $table->json('title');
@@ -24,6 +25,8 @@ class CreateProductsTable extends Migration
             $table->decimal('price');
             $table->decimal('discounted_price')->nullable();
             $table->integer('order')->nullable();
+            $table->integer('stock_type')->default(1);
+            $table->integer('stock')->default(0);
             $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
