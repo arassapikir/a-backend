@@ -25,6 +25,7 @@ class ProductShowResource extends JsonResource
             'discounted_percentage' => $this->discounted_percentage,
             'is_new' => $this->new,
             'sliders' => ProductSliderResource::collection($this->sliders),
+            'parameters' => ProductParameterResource::collection($this->values),
         ];
 
         if ($this->stock_type == 2){
