@@ -79,7 +79,7 @@ class ProductSeeder extends Seeder
         $parameters = Parameter::whereNotNull("parent_id")->where("type", "<>", Parameter::size())->get();
         $discounts = [50, 60, 70, 75, 80, 90, 95];
         foreach (Category::doesntHave("children")->get() as $category){
-            for ($i = 0; $i < rand(15, 30); $i++){
+            for ($i = 0; $i < rand(12, 22); $i++){
                 $faker = \Faker\Factory::create();
                 $product = Product::create([
                     'project_id' => $category->project_id,
