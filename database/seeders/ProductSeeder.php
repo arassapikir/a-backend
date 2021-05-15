@@ -121,16 +121,18 @@ class ProductSeeder extends Seeder
                     'url' => "images/products/img.png"
                 ]);
 
-                $image = $product->pictures()->create([
-                    'type' => 'slider',
-                    'url' => "images/products/img.png"
-                ]);
+                for ($k = 0; $k < rand(1, 5); $k++){
+                    $image = $product->pictures()->create([
+                        'type' => 'slider',
+                        'url' => "images/products/img.png"
+                    ]);
 
-                $product->pictures()->create([
-                    'parent_id' => $image->id,
-                    'type' => 'original',
-                    'url' => "images/products/img.png"
-                ]);
+                    $product->pictures()->create([
+                        'parent_id' => $image->id,
+                        'type' => 'original',
+                        'url' => "images/products/img.png"
+                    ]);
+                }
             }
         }
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductIndexResource;
+use App\Http\Resources\ProductShowResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,8 @@ class ProductController extends Controller
     }
 
     public function show(Product $product){
-
+        return $this->successResponse([
+            'product' => ProductShowResource::collection($product)
+        ]);
     }
 }

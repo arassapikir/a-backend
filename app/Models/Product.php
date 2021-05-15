@@ -162,11 +162,17 @@ class Product extends Model
     }
 
     public function values(){
-        return $this->belongsToMany(Parameter::class, "product_parameters", "product_id", "value_id")->withPivot(['parent_id', 'stock']);
+        return $this->belongsToMany(Parameter::class, "product_parameters", "product_id", "value_id")->withPivot(['parent_id']);
     }
 
     public function parameters(){
         return $this->belongsToMany(Parameter::class, "product_parameters", "product_id", "parent_id")->withPivot(['value_id', 'stock']);
+    }
+
+    public function sizes(){
+        return $this->belongsToMany(Parameter::class, "product_parameters", "product_id", "value_id")
+            ->where('type', Parameter::size())
+            ->withPivot('stock');
     }
 
     public function pictures(){

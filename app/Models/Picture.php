@@ -34,7 +34,8 @@ class Picture extends Model
     public static array $types = [
         'cover',
         'slider',
-        'original'
+        'original',
+        "thumb"
     ];
 
     protected $fillable = [
@@ -49,10 +50,10 @@ class Picture extends Model
     }
 
     public function thumb(){
-        return $this->hasOne(Picture::class);
+        return $this->hasOne(Picture::class, "parent_id")->where("type", "thumb");
     }
 
     public function original(){
-        return $this->hasOne(Picture::class);
+        return $this->hasOne(Picture::class, "parent_id")->where("type", "original");
     }
 }
