@@ -15,17 +15,17 @@ class ProductIndexResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'cover' => $this->cover_url,
-            'brand' => $this->brand_label,
-            'title' => $this->title->{app()->getLocale()},
-            'description' => $this->description->{app()->getLocale()},
-            'price' => number_format($this->price, 2),
-            'is_discounted' => $this->discounted,
-            'discounted_price' => number_format($this->discounted_price, 2),
-            'discounted_percentage' => $this->discounted_percentage,
-            'is_new' => $this->new,
-            'stock' => $this->stock,
+            'id'                    => (int)        $this->id,
+            'cover'                 =>              $this->cover_url,
+            'brand'                 =>              $this->brand_label,
+            'title'                 => (string)     $this->title->{app()->getLocale()},
+            'description'           => (string)     $this->description->{app()->getLocale()},
+            'price'                 => (float)      $this->price,
+            'is_discounted'         => (boolean)    $this->discounted,
+            'discounted_price'      =>              $this->discounted_price,
+            'discounted_percentage' =>              $this->discounted_percentage,
+            'is_new'                => (boolean)    $this->new,
+            'stock'                 => (int)        $this->stock,
         ];
     }
 }
