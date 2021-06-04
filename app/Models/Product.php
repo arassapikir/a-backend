@@ -119,7 +119,7 @@ class Product extends Model
 
     public function getDiscountedPriceAttribute(): ?float
     {
-        return $this->discounted_price ? (float) $this->discounted_price : null;
+        return $this->attributes["discounted_price"] ? (float) $this->attributes["discounted_price"] : null;
     }
 
     public function getDiscountedAttribute(): bool
