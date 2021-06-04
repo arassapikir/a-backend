@@ -107,31 +107,42 @@ class Product extends Model
         'description' => "object",
     ];
 
-    public function getNewAttribute(){
+    public function getNewAttribute(): bool
+    {
         return Carbon::now()->diff(new Carbon($this->created_at))->days > 7;
     }
 
-    public function getBrandLabelAttribute(){
+    public function getBrandLabelAttribute(): ?string
+    {
         return $this->brand ? $this->brand->name : null;
     }
 
-    public function getDiscountedAttribute(){
+    public function getDiscountedPriceAttribute(): ?float
+    {
+        return $this->discounted_price ? (float) $this->discounted_price : null;
+    }
+
+    public function getDiscountedAttribute(): bool
+    {
         return ! ! $this->discounted_price;
     }
 
-    public function getDiscountedPercentageAttribute(){
+    public function getDiscountedPercentageAttribute(): ?float
+    {
         return $this->discounted_price ? round(100 - ($this->discounted_price * 100 / $this->price)) : null;
     }
 
-    public function getCoverUrlAttribute(){
+    public function getCoverUrlAttribute(): ?string
+    {
         return $this->cover ? asset($this->cover->url) : null;
     }
 
-    public function getStockAttribute(){
+    public function getStockAttribute() : int
+    {
         if ($this->stock_type == 1){
-            return $this->attributes['stock'];
+            return (int) $this->attributes['stock'];
         }
-        return $this->sizes->sum('pivot.stock');
+        return (int) $this->sizes->sum('pivot.stock');
     }
 
     /**
